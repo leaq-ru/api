@@ -7,7 +7,12 @@ import (
 type c struct {
 	HTTP     http
 	Service  service
+	Redis    redis
 	LogLevel string `envconfig:"LOGLEVEL"`
+}
+
+type redis struct {
+	URL string `envconfig:"REDIS_URL"`
 }
 
 type http struct {

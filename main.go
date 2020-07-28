@@ -5,6 +5,7 @@ import (
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/nnqq/scr-api/config"
 	"github.com/nnqq/scr-api/logger"
+	"github.com/nnqq/scr-api/ratelimit"
 	"github.com/nnqq/scr-proto/codegen/go/category"
 	"github.com/nnqq/scr-proto/codegen/go/city"
 	"github.com/nnqq/scr-proto/codegen/go/parser"
@@ -29,5 +30,5 @@ func main() {
 	logger.Must(http.ListenAndServe(strings.Join([]string{
 		"0.0.0.0",
 		config.Env.HTTP.Port,
-	}, ":"), mux))
+	}, ":"), ratelimit.Middleware.Handler(mux)))
 }
