@@ -1,0 +1,790 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "parser/company.proto",
+    "version": "version not set"
+  },
+  "paths": {
+    "/v1/category/getAll": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "operationId": "Category_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoryCategoriesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/category/getById": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "operationId": "Category_GetById",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "categoryId",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoryCategoryItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/category/getByIds": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "operationId": "Category_GetByIds",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "categoryIds",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoryCategoriesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/category/getBySlug": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "operationId": "Category_GetBySlug",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "slug",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoryCategoryItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/city/getAll": {
+      "get": {
+        "tags": [
+          "City"
+        ],
+        "operationId": "City_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/cityCitiesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/city/getById": {
+      "get": {
+        "tags": [
+          "City"
+        ],
+        "operationId": "City_GetById",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "cityId",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/cityCityItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/city/getByIds": {
+      "get": {
+        "tags": [
+          "City"
+        ],
+        "operationId": "City_GetByIds",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "cityIds",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/cityCitiesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/city/getBySlug": {
+      "get": {
+        "tags": [
+          "City"
+        ],
+        "operationId": "City_GetBySlug",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "slug",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/cityCityItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/company/get": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "Company_Get",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "Пагинация (skip)",
+            "name": "opts.fromId",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "default": "20",
+            "name": "opts.limit",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "cityId",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "categoryId",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "format": "boolean",
+            "name": "hasEmail",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "format": "boolean",
+            "name": "hasPhone",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/parserGetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/company/getBySlug": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "Company_GetBySlug",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "slug",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/parserFullCompany"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/company/getRelated": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "Company_GetRelated",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "default": "5",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "cityId",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "categoryId",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/parserGetRelatedResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "categoryCategoriesResponse": {
+      "type": "object",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/categoryCategoryItem"
+          }
+        }
+      }
+    },
+    "categoryCategoryItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "categoryFindResponse": {
+      "type": "object",
+      "properties": {
+        "categoryId": {
+          "type": "string"
+        }
+      }
+    },
+    "cityCitiesResponse": {
+      "type": "object",
+      "properties": {
+        "cities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cityCityItem"
+          }
+        }
+      }
+    },
+    "cityCityItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "cityFindResponse": {
+      "type": "object",
+      "properties": {
+        "cityId": {
+          "type": "string"
+        },
+        "isFound": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "optsOpts": {
+      "type": "object",
+      "properties": {
+        "fromId": {
+          "description": "Пагинация (skip)",
+          "type": "string"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "default": "20",
+          "maximum": 100,
+          "minimum": 1
+        }
+      }
+    },
+    "parserApp": {
+      "type": "object",
+      "properties": {
+        "appStore": {
+          "$ref": "#/definitions/parserUrlItem"
+        },
+        "googlePlay": {
+          "$ref": "#/definitions/parserUrlItem"
+        }
+      }
+    },
+    "parserDomain": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "registrar": {
+          "type": "string"
+        },
+        "registrationDate": {
+          "type": "string"
+        }
+      }
+    },
+    "parserFullCompany": {
+      "type": "object",
+      "properties": {
+        "app": {
+          "$ref": "#/definitions/parserApp"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "category": {
+          "$ref": "#/definitions/categoryCategoryItem"
+        },
+        "description": {
+          "type": "string"
+        },
+        "domain": {
+          "$ref": "#/definitions/parserDomain"
+        },
+        "email": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "inn": {
+          "type": "number",
+          "format": "double"
+        },
+        "kpp": {
+          "type": "number",
+          "format": "double"
+        },
+        "location": {
+          "$ref": "#/definitions/parserFullLocation"
+        },
+        "ogrn": {
+          "type": "number",
+          "format": "double"
+        },
+        "online": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "people": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parserPeople"
+          }
+        },
+        "phone": {
+          "type": "number",
+          "format": "double"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "social": {
+          "$ref": "#/definitions/parserSocial"
+        },
+        "title": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "parserFullLocation": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "addressTitle": {
+          "type": "string"
+        },
+        "city": {
+          "$ref": "#/definitions/cityCityItem"
+        }
+      }
+    },
+    "parserGetRelatedResponse": {
+      "type": "object",
+      "properties": {
+        "shortCompanies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parserShortCompany"
+          }
+        }
+      }
+    },
+    "parserGetResponse": {
+      "type": "object",
+      "properties": {
+        "shortCompanies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parserShortCompany"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "parserIsClosed": {
+      "type": "string",
+      "default": "OPEN",
+      "enum": [
+        "OPEN",
+        "CLOSE",
+        "PRIVATE"
+      ]
+    },
+    "parserPeople": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "number",
+          "format": "double"
+        },
+        "photo200": {
+          "type": "string"
+        },
+        "sex": {
+          "$ref": "#/definitions/parserSex"
+        },
+        "vkId": {
+          "type": "number",
+          "format": "double"
+        },
+        "vkIsClosed": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "parserSex": {
+      "type": "string",
+      "default": "NONE",
+      "enum": [
+        "NONE",
+        "FEMALE",
+        "MALE"
+      ]
+    },
+    "parserShortCompany": {
+      "type": "object",
+      "properties": {
+        "avatar": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/definitions/parserShortLocation"
+        },
+        "online": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "phone": {
+          "type": "number",
+          "format": "double"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "parserShortLocation": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "addressTitle": {
+          "type": "string"
+        },
+        "cityId": {
+          "type": "string"
+        }
+      }
+    },
+    "parserSocial": {
+      "type": "object",
+      "properties": {
+        "facebook": {
+          "$ref": "#/definitions/parserUrlItem"
+        },
+        "instagram": {
+          "$ref": "#/definitions/parserUrlItem"
+        },
+        "twitter": {
+          "$ref": "#/definitions/parserUrlItem"
+        },
+        "vk": {
+          "$ref": "#/definitions/parserVk"
+        },
+        "youtube": {
+          "$ref": "#/definitions/parserUrlItem"
+        }
+      }
+    },
+    "parserUrlItem": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "parserVk": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "groupId": {
+          "type": "number",
+          "format": "double"
+        },
+        "isClosed": {
+          "$ref": "#/definitions/parserIsClosed"
+        },
+        "membersCount": {
+          "type": "number",
+          "format": "double"
+        },
+        "name": {
+          "type": "string"
+        },
+        "photo200": {
+          "type": "string"
+        },
+        "screenName": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "description": "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(\u0026foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := \u0026pb.Foo{...}\n     any, err := ptypes.MarshalAny(foo)\n     ...\n     foo := \u0026pb.Foo{}\n     if err := ptypes.UnmarshalAny(any, foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": \u003cstring\u003e,\n      \"lastName\": \u003cstring\u003e\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }",
+      "type": "object",
+      "properties": {
+        "typeUrl": {
+          "description": "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Must be a valid serialized protocol buffer of the above specified type.",
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "runtimeError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        },
+        "error": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -14,21 +14,29 @@ import (
 	"strings"
 )
 
-func main() {
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
+func serveSwaggerUI(mux *http.ServeMux) {
+	fs := http.FileServer(http.Dir("./docs"))
+	mux.Handle("/docs/", http.StripPrefix("/docs/", fs))
+}
 
-	mux := runtime.NewServeMux(runtime.WithMarshalerOption(runtime.MIMEWildcard, &runtime.JSONPb{
-		OrigName: false,
-	}))
+func serveGW(mux *runtime.ServeMux) {
+	ctx := context.Background()
 	opts := []grpc.DialOption{grpc.WithInsecure()}
-
 	logger.Must(parser.RegisterCompanyHandlerFromEndpoint(ctx, mux, config.Env.Service.Parser, opts))
 	logger.Must(city.RegisterCityHandlerFromEndpoint(ctx, mux, config.Env.Service.City, opts))
 	logger.Must(category.RegisterCategoryHandlerFromEndpoint(ctx, mux, config.Env.Service.Category, opts))
+}
 
-	logger.Must(http.ListenAndServe(strings.Join([]string{
-		"0.0.0.0",
-		config.Env.HTTP.Port,
-	}, ":"), ratelimit.Middleware.Handler(mux)))
+func main() {
+	mux := http.NewServeMux()
+	serveSwaggerUI(mux)
+
+	gwMux := runtime.NewServeMux(runtime.WithMarshalerOption(runtime.MIMEWildcard, &runtime.JSONPb{
+		OrigName: false,
+	}))
+	serveGW(gwMux)
+
+	mux.Handle("/", gwMux)
+	addr := strings.Join([]string{"0.0.0.0", config.Env.HTTP.Port}, ":")
+	logger.Must(http.ListenAndServe(addr, ratelimit.Middleware.Handler(mux)))
 }

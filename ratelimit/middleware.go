@@ -27,6 +27,8 @@ func init() {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusTooManyRequests)
 		_, err := w.Write([]byte(`{"error":"Requests per second limit reached. Try again a bit later"}`))
-		logger.Log.Error().Err(err).Send()
+		if err != nil {
+			logger.Log.Error().Err(err).Send()
+		}
 	}))
 }
