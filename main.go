@@ -31,9 +31,7 @@ func main() {
 	mux := http.NewServeMux()
 	serveSwaggerUI(mux)
 
-	gwMux := runtime.NewServeMux(runtime.WithMarshalerOption(runtime.MIMEWildcard, &runtime.JSONPb{
-		OrigName: false,
-	}))
+	gwMux := runtime.NewServeMux(runtime.WithMarshalerOption(runtime.MIMEWildcard, &runtime.JSONPb{}))
 	serveGW(gwMux)
 
 	mux.Handle("/", gwMux)
