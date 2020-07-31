@@ -5,10 +5,18 @@
   "produces": [
     "application/json"
   ],
+  "schemes": [
+    "https"
+  ],
   "swagger": "2.0",
   "info": {
-    "title": "parser/company.proto",
-    "version": "version not set"
+    "description": "API сервиса доступно бесплатно и без ограничений на кол-во запросов в день/месяц. Единственный лимит - 30 запросов в секунду с одного IP адреса.",
+    "title": "leaq API",
+    "contact": {
+      "name": "Поддержка",
+      "url": "https://vk.me/leaq_ru"
+    },
+    "version": "1.0.0"
   },
   "paths": {
     "/v1/category/getAll": {
@@ -124,6 +132,42 @@
         }
       }
     },
+    "/v1/category/getHints": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "operationId": "Category_GetHints",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "title",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "default": "20",
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoryCategoriesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
     "/v1/city/getAll": {
       "get": {
         "tags": [
@@ -226,6 +270,42 @@
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/cityCityItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/city/getHints": {
+      "get": {
+        "tags": [
+          "City"
+        ],
+        "operationId": "City_GetHints",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "title",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "default": "20",
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/cityCitiesResponse"
             }
           },
           "default": {
