@@ -338,25 +338,176 @@
             "in": "query"
           },
           {
-            "type": "string",
-            "name": "cityId",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "cityIds",
             "in": "query"
           },
           {
-            "type": "string",
-            "name": "categoryId",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "categoryIds",
             "in": "query"
           },
           {
-            "type": "boolean",
-            "format": "boolean",
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
             "name": "hasEmail",
             "in": "query"
           },
           {
-            "type": "boolean",
-            "format": "boolean",
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
             "name": "hasPhone",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasOnline",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasInn",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasKpp",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasOgrn",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasAppStore",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasGooglePlay",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasVk",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "vkMembersCount.from",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "vkMembersCount.to",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasInstagram",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasTwitter",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasYoutube",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasFacebook",
             "in": "query"
           }
         ],
@@ -395,6 +546,400 @@
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/parserFullCompany"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/company/getEmailList": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "Company_GetEmailList",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "cityIds",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "categoryIds",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasEmail",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasPhone",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasOnline",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasInn",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasKpp",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasOgrn",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasAppStore",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasGooglePlay",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasVk",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "vkMembersCount.from",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "vkMembersCount.to",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasInstagram",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasTwitter",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasYoutube",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasFacebook",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/parserGetEmailListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/company/getPhoneList": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "Company_GetPhoneList",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "cityIds",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "categoryIds",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasEmail",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasPhone",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasOnline",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasInn",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasKpp",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasOgrn",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasAppStore",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasGooglePlay",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasVk",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "vkMembersCount.from",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "vkMembersCount.to",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasInstagram",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasTwitter",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasYoutube",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasFacebook",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/parserGetPhoneListResponse"
             }
           },
           "default": {
@@ -644,13 +1189,36 @@
         }
       }
     },
+    "parserGetEmailListResponse": {
+      "type": "object",
+      "properties": {
+        "emails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "parserGetPhoneListResponse": {
+      "type": "object",
+      "properties": {
+        "phones": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      }
+    },
     "parserGetRelatedResponse": {
       "type": "object",
       "properties": {
-        "shortCompanies": {
+        "companies": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/parserShortCompany"
+            "$ref": "#/definitions/parserFullCompany"
           }
         }
       }
@@ -658,10 +1226,10 @@
     "parserGetResponse": {
       "type": "object",
       "properties": {
-        "shortCompanies": {
+        "companies": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/parserShortCompany"
+            "$ref": "#/definitions/parserFullCompany"
           }
         },
         "totalCount": {
@@ -714,6 +1282,15 @@
         }
       }
     },
+    "parserSelect": {
+      "type": "string",
+      "default": "ANY",
+      "enum": [
+        "ANY",
+        "YES",
+        "NO"
+      ]
+    },
     "parserSex": {
       "type": "string",
       "default": "NONE",
@@ -722,57 +1299,6 @@
         "FEMALE",
         "MALE"
       ]
-    },
-    "parserShortCompany": {
-      "type": "object",
-      "properties": {
-        "avatar": {
-          "type": "string"
-        },
-        "categoryId": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "location": {
-          "$ref": "#/definitions/parserShortLocation"
-        },
-        "online": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "phone": {
-          "type": "number",
-          "format": "double"
-        },
-        "slug": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "url": {
-          "type": "string"
-        }
-      }
-    },
-    "parserShortLocation": {
-      "type": "object",
-      "properties": {
-        "address": {
-          "type": "string"
-        },
-        "addressTitle": {
-          "type": "string"
-        },
-        "cityId": {
-          "type": "string"
-        }
-      }
     },
     "parserSocial": {
       "type": "object",
@@ -827,6 +1353,19 @@
         },
         "screenName": {
           "type": "string"
+        }
+      }
+    },
+    "parserVkMembersCount": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "to": {
+          "type": "integer",
+          "format": "int64"
         }
       }
     },

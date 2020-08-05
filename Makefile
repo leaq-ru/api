@@ -1,4 +1,4 @@
-PROTO_VER     := v1.1.1-0.20200731161446-9705f2593c75
+PROTO_VER     := v1.1.1-0.20200805210750-6e0741d2ad85
 SWAGGER_PATH  := $(GOPATH)/pkg/mod/github.com/nnqq/scr-proto@$(PROTO_VER)/codegen/swagger
 INFO_PATH     := $(SWAGGER_PATH)/swagger/info.swagger.json
 COMPANY_PATH  := $(SWAGGER_PATH)/parser/company.swagger.json
@@ -8,7 +8,7 @@ CATEGORY_PATH := $(SWAGGER_PATH)/category/category.swagger.json
 # https://github.com/go-swagger/go-swagger
 all:
 	go mod download;
-	docker run --rm -it -e GOPATH=$(HOME)/go:/go -v $(HOME):$(HOME) -w $(shell pwd) quay.io/goswagger/swagger:v0.25.0 mixin \
+	- docker run --rm -it -e GOPATH=$(HOME)/go:/go -v $(HOME):$(HOME) -w $(shell pwd) quay.io/goswagger/swagger:v0.25.0 mixin \
 		$(INFO_PATH) \
 		$(COMPANY_PATH) \
 		$(CITY_PATH) \

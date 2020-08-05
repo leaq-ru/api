@@ -5,6 +5,7 @@ import (
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/nnqq/scr-api/config"
 	"github.com/nnqq/scr-api/logger"
+	"github.com/nnqq/scr-api/middleware"
 	"github.com/nnqq/scr-api/ratelimit"
 	"github.com/nnqq/scr-proto/codegen/go/category"
 	"github.com/nnqq/scr-proto/codegen/go/city"
@@ -36,5 +37,5 @@ func main() {
 
 	mux.Handle("/", gwMux)
 	addr := strings.Join([]string{"0.0.0.0", config.Env.HTTP.Port}, ":")
-	logger.Must(http.ListenAndServe(addr, ratelimit.Middleware.Handler(mux)))
+	logger.Must(http.ListenAndServe(addr, middleware.AllowCORS(ratelimit.Middleware.Handler(mux))))
 }
