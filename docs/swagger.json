@@ -147,7 +147,7 @@
           {
             "type": "integer",
             "format": "int64",
-            "default": "20",
+            "description": "20 default",
             "name": "limit",
             "in": "query"
           }
@@ -296,7 +296,7 @@
           {
             "type": "integer",
             "format": "int64",
-            "default": "20",
+            "description": "20 default",
             "name": "limit",
             "in": "query"
           }
@@ -326,14 +326,14 @@
         "parameters": [
           {
             "type": "string",
-            "description": "Пагинация (skip)",
+            "description": "Pagination (skip)",
             "name": "opts.fromId",
             "in": "query"
           },
           {
             "type": "integer",
             "format": "int64",
-            "default": "20",
+            "description": "20 default",
             "name": "opts.limit",
             "in": "query"
           },
@@ -961,7 +961,7 @@
           {
             "type": "integer",
             "format": "int64",
-            "default": "5",
+            "description": "5 default",
             "name": "limit",
             "in": "query"
           },
@@ -1068,13 +1068,13 @@
       "type": "object",
       "properties": {
         "fromId": {
-          "description": "Пагинация (skip)",
+          "description": "Pagination (skip)",
           "type": "string"
         },
         "limit": {
+          "description": "20 default",
           "type": "integer",
           "format": "int64",
-          "default": "20",
           "maximum": 100,
           "minimum": 1
         }

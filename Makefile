@@ -1,4 +1,4 @@
-PROTO_VER     := v1.1.1-0.20200805210750-6e0741d2ad85
+PROTO_VER     := v1.1.1-0.20200806111930-14d63fa013a2
 SWAGGER_PATH  := $(GOPATH)/pkg/mod/github.com/nnqq/scr-proto@$(PROTO_VER)/codegen/swagger
 INFO_PATH     := $(SWAGGER_PATH)/swagger/info.swagger.json
 COMPANY_PATH  := $(SWAGGER_PATH)/parser/company.swagger.json
@@ -14,3 +14,5 @@ all:
 		$(CITY_PATH) \
 		$(CATEGORY_PATH) \
 		-o docs/swagger.json;
+	docker run --rm -it -e GOPATH=$(HOME)/go:/go -v $(HOME):$(HOME) -w $(shell pwd) quay.io/goswagger/swagger:v0.25.0 validate \
+		docs/swagger.json; \
