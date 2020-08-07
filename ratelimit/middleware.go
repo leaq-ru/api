@@ -23,12 +23,12 @@ func init() {
 
 	instance := limiter.New(store, rate, limiter.WithTrustForwardHeader(true))
 
-	Middleware = stdlib.NewMiddleware(instance, stdlib.WithLimitReachedHandler(func(w http.ResponseWriter, _ *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusTooManyRequests)
-		_, err := w.Write([]byte(`{"error":"Requests per second limit reached. Try again a bit later"}`))
-		if err != nil {
-			logger.Log.Error().Err(err).Send()
-		}
-	}))
+	Middleware = stdlib.NewMiddleware(instance, stdlib.WithLimitReachedHandler(
+		func(w http.ResponseWriter, _ *http.Request) {
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusTooManyRequests)
+			_, err := w.Write([]byte(`{"error":"Requests per second limit reached. Try again a bit later"}`))
+			logger.Err(err)
+		}),
+	)
 }

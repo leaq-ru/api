@@ -15,6 +15,13 @@ import (
 	"strings"
 )
 
+func serveHealthz(mux *http.ServeMux) {
+	mux.Handle("/healthz", http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		_, err := w.Write(nil)
+		logger.Err(err)
+	}))
+}
+
 func serveSwaggerUI(mux *http.ServeMux) {
 	fs := http.FileServer(http.Dir("./docs"))
 	mux.Handle("/docs/", http.StripPrefix("/docs/", fs))
@@ -30,6 +37,7 @@ func serveGW(mux *runtime.ServeMux) {
 
 func main() {
 	mux := http.NewServeMux()
+	serveHealthz(mux)
 	serveSwaggerUI(mux)
 
 	gwMux := runtime.NewServeMux(runtime.WithMarshalerOption(runtime.MIMEWildcard, &runtime.JSONPb{}))
