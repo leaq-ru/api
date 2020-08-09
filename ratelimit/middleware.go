@@ -7,15 +7,16 @@ import (
 	"github.com/ulule/limiter/v3/drivers/middleware/stdlib"
 	"github.com/ulule/limiter/v3/drivers/store/redis"
 	"net/http"
+	"strings"
 	"time"
 )
 
-var Middleware *stdlib.Middleware
+var Middleware func(http.Handler) http.Handler
 
 func init() {
 	rate := limiter.Rate{
 		Period: time.Second,
-		Limit:  30,
+		Limit:  10,
 	}
 
 	store, err := redis.NewStore(r.Client)
@@ -23,7 +24,7 @@ func init() {
 
 	instance := limiter.New(store, rate, limiter.WithTrustForwardHeader(true))
 
-	Middleware = stdlib.NewMiddleware(instance, stdlib.WithLimitReachedHandler(
+	bottleneck := stdlib.NewMiddleware(instance, stdlib.WithLimitReachedHandler(
 		func(w http.ResponseWriter, _ *http.Request) {
 			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusTooManyRequests)
@@ -31,4 +32,16 @@ func init() {
 			logger.Err(err)
 		}),
 	)
+
+	Middleware = func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			if strings.Split(r.Host, ":")[0] == "web" {
+				// no rate limit for own SSR frontend
+				next.ServeHTTP(w, r)
+				return
+			}
+
+			bottleneck.Handler(next).ServeHTTP(w, r)
+		})
+	}
 }
