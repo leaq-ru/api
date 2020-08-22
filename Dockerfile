@@ -1,5 +1,3 @@
-# syntax=docker/dockerfile:experimental
-
 FROM golang:1.15-alpine AS build
 ARG GITHUB_TOKEN=$GITHUB_TOKEN
 WORKDIR /app
