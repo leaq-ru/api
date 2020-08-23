@@ -42,10 +42,10 @@ jobs:
 
     - name: Extract service name
       uses: bluwy/substitute-string-action@v1
-        id: substr
-        with:
-          _input-text: ${{ github.repository }}
-          nnqq/scr-: ''
+      id: substr
+      with:
+        _input-text: ${{ github.repository }}
+        nnqq/scr-: ''
 
     - name: Update deployment
       run: kubectl rollout restart deployment/${{ steps.substr.outputs.result }}
