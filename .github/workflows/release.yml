@@ -2,7 +2,7 @@ name: release
 
 on:
   release:
-    types: 
+    types:
       - published
 
 jobs:
@@ -21,7 +21,7 @@ jobs:
           registry: docker.pkg.github.com
           repository: my-org/my-repo/my-image
           tag_with_ref: true
-          build_args: GITHUB_CI_TOKEN=${{ secrets.GH_CI_TOKEN }}
+          build_args: GH_CI_TOKEN=${{ secrets.GH_CI_TOKEN }}
 
   deploy:
     name: Deploy to k8s
@@ -36,7 +36,7 @@ jobs:
       run: doctl kubernetes cluster kubeconfig save k8s
 
     - name: Update deployment file
-      run: sed -i 's|<IMAGE>|docker.pkg.github.com/${{ github.repository }}:'${{ github.ref }}'|' $GITHUB_WORKSPACE/config/deployment.yml    
+      run: sed -i 's|<IMAGE>|docker.pkg.github.com/${{ github.repository }}:'${{ github.ref }}'|' $GITHUB_WORKSPACE/config/deployment.yml
 
     - name: Deploy to DigitalOcean Kubernetes
       run: kubectl apply -f $GITHUB_WORKSPACE/config/deployment.yml
