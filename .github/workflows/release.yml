@@ -42,4 +42,4 @@ jobs:
       run: kubectl apply -f $GITHUB_WORKSPACE/config/deployment.yml
 
     - name: Verify deployment
-      run: kubectl rollout status deployment/${{ github.repository#"nnqq/scr-" }}
+      run: name=${${{github.repository}}#"nnqq/scr-"} && kubectl rollout status deployment/${name}
