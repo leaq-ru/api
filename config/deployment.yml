@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
         - name: api
+          image: busybox
           command:
             - /app/servicebin
           livenessProbe:
