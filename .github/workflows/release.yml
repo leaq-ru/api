@@ -32,7 +32,7 @@ jobs:
         run: doctl kubernetes cluster kubeconfig save k8s
 
       - name: Apply deployment
-        run: kubectl apply -f ${{ github.workspace }}/config/deployment.yaml
+        run: kubectl apply -f ${{ github.workspace }}/config/deployment.yml
 
       - name: Extract service name
         uses: bluwy/substitute-string-action@v1
