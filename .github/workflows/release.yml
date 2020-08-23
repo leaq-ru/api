@@ -43,7 +43,7 @@ jobs:
           nnqq/scr-: ''
 
       - name: Update deployment
-        run: kubectl -n leaq rollout restart deployment/${{ steps.substr.outputs.result }}
+        run: kubectl -n leaq set image deployment/${{ steps.substr.outputs.result }} ${{ steps.substr.outputs.result }}=docker.pkg.github.com/${{ github.repository }}/service:${{ github.event.release.tag_name }}
 
       - name: Verify deployment
         run: kubectl -n leaq rollout status deployment/${{ steps.substr.outputs.result }}
