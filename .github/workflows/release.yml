@@ -32,7 +32,7 @@ jobs:
         run: doctl kubernetes cluster kubeconfig save k8s
 
       - name: Apply deployment
-        run: kubectl apply -f ${{ github.workspace }}/config/deployment.yml
+        run: kubectl -n leaq apply -f ${{ github.workspace }}/config/deployment.yml
 
       - name: Extract service name
         uses: bluwy/substitute-string-action@v1
@@ -42,7 +42,7 @@ jobs:
           nnqq/scr-: ''
 
       - name: Update deployment
-        run: kubectl rollout restart deployment/${{ steps.substr.outputs.result }}
+        run: kubectl -n leaq rollout restart deployment/${{ steps.substr.outputs.result }}
 
       - name: Verify deployment
-        run: kubectl rollout status deployment/${{ steps.substr.outputs.result }}
+        run: kubectl -n leaq rollout status deployment/${{ steps.substr.outputs.result }}
