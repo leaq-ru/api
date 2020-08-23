@@ -9,8 +9,11 @@ import (
 var Client *r.Client
 
 func init() {
-	rdb := r.NewClient(&r.Options{
-		Addr: config.Env.Redis.URL,
+	rdb := r.NewFailoverClient(&r.FailoverOptions{
+		MasterName: "mymaster",
+		SentinelAddrs: []string{
+			config.Env.Redis.URL,
+		},
 	})
 
 	err := rdb.Ping().Err()
