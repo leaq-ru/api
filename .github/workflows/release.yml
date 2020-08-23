@@ -33,7 +33,7 @@ jobs:
         run: doctl kubernetes cluster kubeconfig save k8s
 
       - name: Update deployment file
-        run: sed -i 's|<IMAGE>|docker.pkg.github.com/${{ github.repository }}/service:${{ github.event.release.tag_name }}|' $GITHUB_WORKSPACE/config/deployment.yml
+        run: sed -i 's|busybox|docker.pkg.github.com/${{ github.repository }}/service:${{ github.event.release.tag_name }}|' $GITHUB_WORKSPACE/config/deployment.yml
 
       - name: Debug
         run: cat $GITHUB_WORKSPACE/config/deployment.yml
