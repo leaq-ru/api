@@ -5,9 +5,6 @@ on:
     types:
       - published
 
-env:
-  SERVICE_NAME: ${{github.repository}}#"nnqq/scr-"
-
 jobs:
   push_to_registry:
     name: Push Docker image to GitHub Packages
@@ -31,6 +28,8 @@ jobs:
       - push_to_registry
     name: Deploy to k8s
     runs-on: ubuntu-latest
+    env:
+      SERVICE_NAME: ${{github.repository}}#"nnqq/scr-"
     steps:
     - name: Install doctl
       uses: digitalocean/action-doctl@v2
@@ -41,7 +40,7 @@ jobs:
       run: doctl kubernetes cluster kubeconfig save k8s
 
     - name: Apply deployment
-      run: kubectl apply -f $GITHUB_WORKSPACE/config/deployment.yml
+      run: kubectl apply -f ${{ github.workspace }}/config/deployment.yml
 
     - name: Update deployment
       run: kubectl rollout restart deployment/$SERVICE_NAME
