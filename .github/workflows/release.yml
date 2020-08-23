@@ -1,0 +1,45 @@
+name: release
+
+on:
+  release:
+    types: 
+      - published
+
+jobs:
+  push_to_registry:
+    name: Push Docker image to GitHub Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: nnqq
+          password: ${{ secrets.GITHUB_CI_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: my-org/my-repo/my-image
+          tag_with_ref: true
+          build_args: GITHUB_CI_TOKEN=${{ secrets.GITHUB_CI_TOKEN }}
+
+  deploy:
+    name: Deploy to k8s
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install doctl
+      uses: digitalocean/action-doctl@v2
+      with:
+        token: ${{ secrets.DIGITALOCEAN_CI_TOKEN }}
+
+    - name: Save DigitalOcean kubeconfig
+      run: doctl kubernetes cluster kubeconfig save k8s
+
+    - name: Update deployment file
+      run: sed -i 's|<IMAGE>|docker.pkg.github.com/${{ github.repository }}:'${{ github.ref }}'|' $GITHUB_WORKSPACE/config/deployment.yml    
+
+    - name: Deploy to DigitalOcean Kubernetes
+      run: kubectl apply -f $GITHUB_WORKSPACE/config/deployment.yml
+
+    - name: Verify deployment
+      run: kubectl rollout status deployment/${{ github.repository#"nnqq/scr-" }}
