@@ -19,11 +19,13 @@ jobs:
           username: nnqq
           password: ${{ secrets.GH_CI_TOKEN }}
           registry: docker.pkg.github.com
-          repository: my-org/my-repo/my-image
+          repository: ${{ github.repository }}
           tag_with_ref: true
           build_args: GH_CI_TOKEN=${{ secrets.GH_CI_TOKEN }}
 
   deploy:
+    needs:
+      - push_to_registry
     name: Deploy to k8s
     runs-on: ubuntu-latest
     steps:
