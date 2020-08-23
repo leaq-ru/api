@@ -37,7 +37,7 @@ func serveGW(mux *runtime.ServeMux) {
 }
 
 func main() {
-	log.Print("alive 1")
+	log.Print("alive 2")
 	mux := http.NewServeMux()
 	serveHealthz(mux)
 	serveSwaggerUI(mux)
