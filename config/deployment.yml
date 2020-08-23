@@ -13,12 +13,15 @@ spec:
     metadata:
       labels:
         app: api
+      annotations:
+        linkerd.io/inject: enabled
+        config.linkerd.io/skip-outbound-ports: "4222"
     spec:
       imagePullSecrets:
         - name: regcred
       containers:
         - name: api
-          image: busybox
+          image: docker.pkg.github.com/nnqq/scr-api/service:latest
           command:
             - /app/servicebin
           livenessProbe:

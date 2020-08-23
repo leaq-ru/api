@@ -32,8 +32,8 @@ jobs:
       - name: Save DigitalOcean kubeconfig
         run: doctl kubernetes cluster kubeconfig save k8s
 
-      - name: Apply deployment
-        run: kubectl -n leaq apply -f ${{ github.workspace }}/config/deployment.yml
+      - name: Create deployment
+        run: kubectl -n leaq create -f ${{ github.workspace }}/config/deployment.yml
 
       - name: Extract service name
         uses: bluwy/substitute-string-action@v1
