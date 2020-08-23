@@ -5,6 +5,9 @@ on:
     types:
       - published
 
+env:
+  SERVICE_NAME: ${{github.repository}}#"nnqq/scr-"
+
 jobs:
   push_to_registry:
     name: Push Docker image to GitHub Packages
@@ -37,11 +40,11 @@ jobs:
     - name: Save DigitalOcean kubeconfig
       run: doctl kubernetes cluster kubeconfig save k8s
 
-    - name: Update deployment file
-      run: sed -i 's |<IMAGE> | docker.pkg.github.com/${{ github.repository }}/svc:'${{ github.ref }}' |' $GITHUB_WORKSPACE/config/deployment.yml
-
-    - name: Deploy to DigitalOcean Kubernetes
+    - name: Apply deployment
       run: kubectl apply -f $GITHUB_WORKSPACE/config/deployment.yml
 
+    - name: Update deployment
+      run: kubectl rollout restart deployment/$SERVICE_NAME
+
     - name: Verify deployment
-      run: name=${${{github.repository}}#"nnqq/scr-"} && kubectl rollout status deployment/${name}
+      run: kubectl rollout status deployment/$SERVICE_NAME
