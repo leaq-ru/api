@@ -86,6 +86,8 @@ github.com/nnqq/scr-proto v1.1.1-0.20200806111230-79a7c9136e6a h1:O1bqup+p0N31ia
 github.com/nnqq/scr-proto v1.1.1-0.20200806111230-79a7c9136e6a/go.mod h1:LjftPDG+3kDsntAb2JT/mg2ARliGLaGKlvZYDrn8Ne8=
 github.com/nnqq/scr-proto v1.1.1-0.20200806111930-14d63fa013a2 h1:+7Q0V62qdy3XMNq8Sy8iDY6J8PHhaLqB2E7V+XUl124=
 github.com/nnqq/scr-proto v1.1.1-0.20200806111930-14d63fa013a2/go.mod h1:LjftPDG+3kDsntAb2JT/mg2ARliGLaGKlvZYDrn8Ne8=
+github.com/nnqq/scr-proto v1.2.0 h1:d48fT+HmBLJVTdcX4tSzcJ45gsH3V4Tbqj7nxz96LlQ=
+github.com/nnqq/scr-proto v1.2.0/go.mod h1:LjftPDG+3kDsntAb2JT/mg2ARliGLaGKlvZYDrn8Ne8=
 github.com/onsi/ginkgo v1.6.0/go.mod h1:lLunBs/Ym6LB5Z9jYTR76FiuTmxDTDusOGeTQH+WWjE=
 github.com/onsi/ginkgo v1.10.1 h1:q/mM8GF/n0shIN8SaAZ0V+jnLPzen6WIVZdiwrRlMlo=
 github.com/onsi/ginkgo v1.10.1/go.mod h1:lLunBs/Ym6LB5Z9jYTR76FiuTmxDTDusOGeTQH+WWjE=
