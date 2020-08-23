@@ -5,7 +5,7 @@ metadata:
   labels:
     app: api
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: api
@@ -18,3 +18,41 @@ spec:
         - name: api
           image: docker.pkg.github.com/nnqq/scr-api/svc:latest
           imagePullPolicy: Always
+          command:
+            - /app/servicebin
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+          env:
+            - name: HTTP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: port
+                  name: http
+            - name: SERVICE_PARSER
+              valueFrom:
+                configMapKeyRef:
+                  key: parser
+                  name: service
+            - name: SERVICE_CITY
+              valueFrom:
+                configMapKeyRef:
+                  key: city
+                  name: service
+            - name: SERVICE_CATEGORY
+              valueFrom:
+                configMapKeyRef:
+                  key: category
+                  name: service
+            - name: REDIS_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: url
+                  name: redis
+            - name: LOGLEVEL
+              value: error
