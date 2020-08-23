@@ -11,7 +11,6 @@ import (
 	"github.com/nnqq/scr-proto/codegen/go/city"
 	"github.com/nnqq/scr-proto/codegen/go/parser"
 	"google.golang.org/grpc"
-	"log"
 	"net/http"
 	"strings"
 )
@@ -37,7 +36,6 @@ func serveGW(mux *runtime.ServeMux) {
 }
 
 func main() {
-	log.Print("alive 2")
 	mux := http.NewServeMux()
 	serveHealthz(mux)
 	serveSwaggerUI(mux)
