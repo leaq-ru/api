@@ -45,7 +45,7 @@ jobs:
         id: substr
         with:
           _input-text: ${{ github.repository }}
-          'nnqq/scr-': ''
+          nnqq/scr-: ''
 
     - name: Update deployment
       run: kubectl rollout restart deployment/${{ steps.substr.outputs.result }}
