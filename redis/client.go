@@ -10,7 +10,7 @@ var Client *r.Client
 
 func init() {
 	rdb := r.NewFailoverClient(&r.FailoverOptions{
-		MasterName: "mymaster",
+		MasterName: config.Env.Redis.Master,
 		SentinelAddrs: []string{
 			config.Env.Redis.URL,
 		},

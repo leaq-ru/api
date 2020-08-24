@@ -83,5 +83,10 @@ spec:
                 configMapKeyRef:
                   key: url
                   name: redis
+            - name: REDIS_MASTER
+              valueFrom:
+                configMapKeyRef:
+                  key: master
+                  name: redis
             - name: LOGLEVEL
               value: error

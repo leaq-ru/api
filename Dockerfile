@@ -8,5 +8,5 @@ RUN git config --global url."https://nnqq:$GH_CI_TOKEN@github.com/".insteadOf "h
 RUN go build -o servicebin
 
 FROM alpine:latest
-COPY --from=build /app/servicebin /app/
+COPY --from=build /app/servicebin /app
 COPY --from=build /app/docs /app/docs
