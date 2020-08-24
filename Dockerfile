@@ -9,5 +9,5 @@ RUN go build -o servicebin
 
 FROM alpine:latest
 WORKDIR /app
-COPY --from=build /app/servicebin /
-COPY --from=build /app/docs /docs
+COPY --from=build /app/servicebin /app
+COPY --from=build /app/docs /app/docs
