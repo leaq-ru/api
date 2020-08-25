@@ -1,4 +1,4 @@
-PROTO_VER     := v1.1.1-0.20200806111930-14d63fa013a2
+PROTO_VER     := v1.2.1
 SWAGGER_PATH  := $(GOPATH)/pkg/mod/github.com/nnqq/scr-proto@$(PROTO_VER)/codegen/swagger
 INFO_PATH     := $(SWAGGER_PATH)/swagger/info.swagger.json
 COMPANY_PATH  := $(SWAGGER_PATH)/parser/company.swagger.json
