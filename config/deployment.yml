@@ -89,4 +89,4 @@ spec:
                   key: master
                   name: redis
             - name: LOGLEVEL
-              value: error
+              value: debug
