@@ -6,7 +6,6 @@ import (
 	"github.com/ulule/limiter/v3"
 	"github.com/ulule/limiter/v3/drivers/middleware/stdlib"
 	"github.com/ulule/limiter/v3/drivers/store/redis"
-	"log"
 	"net/http"
 	"time"
 )
@@ -35,13 +34,12 @@ func init() {
 
 	Middleware = func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			if r.Header.Get("Origin") == "https://leaq.ru" || r.URL.Path == "/healthz" {
-				log.Print("no ratelimit", r.URL.Path)
+			if r.Header.Get("Origin") == "https://leaq.ru" || r.Host == "api" || r.URL.Path == "/healthz" {
 				// no rate limit for own SSR frontend, or k8s probe
 				next.ServeHTTP(w, r)
 				return
 			}
-			log.Print("with ratelimit", r.URL.Path)
+
 			bottleneck.Handler(next).ServeHTTP(w, r)
 		})
 	}
