@@ -11,7 +11,7 @@
   "swagger": "2.0",
   "info": {
     "description": "API сервиса доступно бесплатно и без ограничений на кол-во запросов в день/месяц. Единственный лимит - 10 запросов в секунду с одного IP адреса.",
-    "title": "leaq API",
+    "title": "LEAQ API",
     "contact": {
       "name": "Поддержка",
       "url": "https://vk.me/leaq_ru"
@@ -1231,10 +1231,6 @@
           "items": {
             "$ref": "#/definitions/parserFullCompany"
           }
-        },
-        "totalCount": {
-          "type": "integer",
-          "format": "int64"
         }
       }
     },
