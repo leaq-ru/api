@@ -46,8 +46,8 @@ spec:
               protocol: TCP
           resources:
             requests:
-              cpu: 500m
-              memory: 30Mi
+              cpu: 10m
+              memory: 20Mi
             limits:
               cpu: "1"
               memory: 1Gi
@@ -85,25 +85,25 @@ spec:
             - name: LOGLEVEL
               value: error
 
----
-apiVersion: autoscaling/v2beta2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: api
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: api
-  minReplicas: 1
-  maxReplicas: 5
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        target:
-          type: Utilization
-          averageUtilization: 100
+#---
+#apiVersion: autoscaling/v2beta2
+#kind: HorizontalPodAutoscaler
+#metadata:
+#  name: api
+#spec:
+#  scaleTargetRef:
+#    apiVersion: apps/v1
+#    kind: Deployment
+#    name: api
+#  minReplicas: 1
+#  maxReplicas: 5
+#  metrics:
+#    - type: Resource
+#      resource:
+#        name: cpu
+#        target:
+#          type: Utilization
+#          averageUtilization: 100
 
 ---
 apiVersion: v1
