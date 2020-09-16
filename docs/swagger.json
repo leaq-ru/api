@@ -742,7 +742,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/parserGetEmailListResponse"
+              "$ref": "#/definitions/parserGetListResponse"
             }
           },
           "default": {
@@ -939,7 +939,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/parserGetPhoneListResponse"
+              "$ref": "#/definitions/parserGetListResponse"
             }
           },
           "default": {
@@ -1189,26 +1189,11 @@
         }
       }
     },
-    "parserGetEmailListResponse": {
+    "parserGetListResponse": {
       "type": "object",
       "properties": {
-        "emails": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "parserGetPhoneListResponse": {
-      "type": "object",
-      "properties": {
-        "phones": {
-          "type": "array",
-          "items": {
-            "type": "number",
-            "format": "double"
-          }
+        "downloadUrl": {
+          "type": "string"
         }
       }
     },
