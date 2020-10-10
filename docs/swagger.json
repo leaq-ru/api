@@ -509,6 +509,15 @@
             "default": "ANY",
             "name": "hasFacebook",
             "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "excludeIds",
+            "in": "query"
           }
         ],
         "responses": {
@@ -956,6 +965,7 @@
         "tags": [
           "Company"
         ],
+        "summary": "DEPRECATED: use Get instead",
         "operationId": "Company_GetRelated",
         "parameters": [
           {
@@ -1227,6 +1237,15 @@
         "CLOSE",
         "PRIVATE"
       ]
+    },
+    "parserIsCompanyAvatarExistsResponse": {
+      "type": "object",
+      "properties": {
+        "isExists": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
     },
     "parserPeople": {
       "type": "object",
