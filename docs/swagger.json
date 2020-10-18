@@ -518,6 +518,25 @@
             "collectionFormat": "multi",
             "name": "excludeIds",
             "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "technologyIds",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ONE_OF",
+              "ALL"
+            ],
+            "type": "string",
+            "default": "ONE_OF",
+            "name": "technologyFindRule",
+            "in": "query"
           }
         ],
         "responses": {
@@ -541,6 +560,7 @@
         "tags": [
           "Company"
         ],
+        "summary": "DEPRECATED",
         "operationId": "Company_GetBySlug",
         "parameters": [
           {
@@ -745,6 +765,25 @@
             "default": "ANY",
             "name": "hasFacebook",
             "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "technologyIds",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ONE_OF",
+              "ALL"
+            ],
+            "type": "string",
+            "default": "ONE_OF",
+            "name": "technologyFindRule",
+            "in": "query"
           }
         ],
         "responses": {
@@ -942,6 +981,25 @@
             "default": "ANY",
             "name": "hasFacebook",
             "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "technologyIds",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ONE_OF",
+              "ALL"
+            ],
+            "type": "string",
+            "default": "ONE_OF",
+            "name": "technologyFindRule",
+            "in": "query"
           }
         ],
         "responses": {
@@ -965,7 +1023,7 @@
         "tags": [
           "Company"
         ],
-        "summary": "DEPRECATED: use Get instead",
+        "summary": "DEPRECATED: to get related companies use /v1/company/get with cityIds, categoryIds and excludeIds",
         "operationId": "Company_GetRelated",
         "parameters": [
           {
@@ -991,6 +1049,110 @@
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/parserGetRelatedResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/technology/getHints": {
+      "get": {
+        "tags": [
+          "Technology"
+        ],
+        "operationId": "Technology_GetHints",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "name",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "excludeIds",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "20 default",
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/technologyGetHintsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/technology/getId": {
+      "get": {
+        "tags": [
+          "Technology"
+        ],
+        "operationId": "Technology_GetId",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "slug",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/technologyGetIdResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v2/company/getBySlug": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "Company_GetBySlugV2",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "slug",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/parserGetBySlugResponse"
             }
           },
           "default": {
@@ -1115,6 +1277,14 @@
         }
       }
     },
+    "parserFindRule": {
+      "type": "string",
+      "default": "ONE_OF",
+      "enum": [
+        "ONE_OF",
+        "ALL"
+      ]
+    },
     "parserFullCompany": {
       "type": "object",
       "properties": {
@@ -1196,6 +1366,25 @@
         },
         "city": {
           "$ref": "#/definitions/cityCityItem"
+        }
+      }
+    },
+    "parserGetBySlugResponse": {
+      "type": "object",
+      "properties": {
+        "fullCompany": {
+          "$ref": "#/definitions/parserFullCompany"
+        },
+        "pageSpeed": {
+          "type": "integer",
+          "format": "int64",
+          "title": "milliseconds"
+        },
+        "technologyCategories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parserTechnologyCategory"
+          }
         }
       }
     },
@@ -1320,6 +1509,40 @@
         }
       }
     },
+    "parserTechnologyCategory": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "technologies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parserTechnologyItem"
+          }
+        }
+      }
+    },
+    "parserTechnologyItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
     "parserUrlItem": {
       "type": "object",
       "properties": {
@@ -1401,6 +1624,95 @@
           "type": "string"
         },
         "message": {
+          "type": "string"
+        }
+      }
+    },
+    "technologyCategoryItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "technologyFindResponse": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "technologyGetByIdsResponse": {
+      "type": "object",
+      "properties": {
+        "technologies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/technologyTechnologyItem"
+          }
+        }
+      }
+    },
+    "technologyGetHintsResponse": {
+      "type": "object",
+      "properties": {
+        "technologies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/technologyHintTechnologyItem"
+          }
+        }
+      }
+    },
+    "technologyGetIdResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "technologyHintTechnologyItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "technologyTechnologyItem": {
+      "type": "object",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/technologyCategoryItem"
+          }
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "version": {
           "type": "string"
         }
       }
