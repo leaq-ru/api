@@ -10,6 +10,7 @@ import (
 	"github.com/nnqq/scr-proto/codegen/go/category"
 	"github.com/nnqq/scr-proto/codegen/go/city"
 	"github.com/nnqq/scr-proto/codegen/go/parser"
+	"github.com/nnqq/scr-proto/codegen/go/technology"
 	"google.golang.org/grpc"
 	"net/http"
 	"strings"
@@ -33,6 +34,7 @@ func serveGW(mux *runtime.ServeMux) {
 	logger.Must(parser.RegisterCompanyHandlerFromEndpoint(ctx, mux, config.Env.Service.Parser, opts))
 	logger.Must(city.RegisterCityHandlerFromEndpoint(ctx, mux, config.Env.Service.City, opts))
 	logger.Must(category.RegisterCategoryHandlerFromEndpoint(ctx, mux, config.Env.Service.Category, opts))
+	logger.Must(technology.RegisterTechnologyHandlerFromEndpoint(ctx, mux, config.Env.Service.Technology, opts))
 }
 
 func main() {
