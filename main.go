@@ -32,6 +32,7 @@ func serveGW(mux *runtime.ServeMux) {
 	ctx := context.Background()
 	opts := []grpc.DialOption{grpc.WithInsecure()}
 	logger.Must(parser.RegisterCompanyHandlerFromEndpoint(ctx, mux, config.Env.Service.Parser, opts))
+	logger.Must(parser.RegisterPostHandlerFromEndpoint(ctx, mux, config.Env.Service.Parser, opts))
 	logger.Must(city.RegisterCityHandlerFromEndpoint(ctx, mux, config.Env.Service.City, opts))
 	logger.Must(category.RegisterCategoryHandlerFromEndpoint(ctx, mux, config.Env.Service.Category, opts))
 	logger.Must(technology.RegisterTechnologyHandlerFromEndpoint(ctx, mux, config.Env.Service.Technology, opts))

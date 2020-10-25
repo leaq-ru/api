@@ -322,6 +322,7 @@
         "tags": [
           "Company"
         ],
+        "summary": "DEPRECATED",
         "operationId": "Company_Get",
         "parameters": [
           {
@@ -575,6 +576,67 @@
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/parserFullCompany"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/company/getBySlugs": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "Company_GetBySlugs",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "opts.skip",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "20 default",
+            "name": "opts.limit",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "opts.excludeIds",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "citySlug",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "categorySlug",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "technologySlug",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/parserShortCompanies"
             }
           },
           "default": {
@@ -1023,7 +1085,7 @@
         "tags": [
           "Company"
         ],
-        "summary": "DEPRECATED: to get related companies use /v1/company/get with cityIds, categoryIds and excludeIds",
+        "summary": "DEPRECATED: to get related companies use /v{latest}/company/get with cityIds, categoryIds and excludeIds",
         "operationId": "Company_GetRelated",
         "parameters": [
           {
@@ -1049,6 +1111,57 @@
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/parserGetRelatedResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/post/get": {
+      "get": {
+        "tags": [
+          "Post"
+        ],
+        "operationId": "Post_GetPosts",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "opts.skip",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "20 default",
+            "name": "opts.limit",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "opts.excludeIds",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "companyId",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/parserGetPostsResponse"
             }
           },
           "default": {
@@ -1123,6 +1236,244 @@
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/technologyGetHintsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v2/company/get": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "Company_GetV2",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "opts.skip",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "20 default",
+            "name": "opts.limit",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "opts.excludeIds",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "cityIds",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "categoryIds",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasEmail",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasPhone",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasOnline",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasInn",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasKpp",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasOgrn",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasAppStore",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasGooglePlay",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasVk",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "vkMembersCount.from",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "vkMembersCount.to",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasInstagram",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasTwitter",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasYoutube",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasFacebook",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "technologyIds",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ONE_OF",
+              "ALL"
+            ],
+            "type": "string",
+            "default": "ONE_OF",
+            "name": "technologyFindRule",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/parserShortCompanies"
             }
           },
           "default": {
@@ -1248,6 +1599,29 @@
           "type": "integer",
           "format": "int64",
           "maximum": 100,
+          "minimum": 1
+        }
+      }
+    },
+    "optsPage": {
+      "type": "object",
+      "properties": {
+        "excludeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limit": {
+          "description": "20 default",
+          "type": "integer",
+          "format": "int64",
+          "maximum": 100,
+          "minimum": 1
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int64",
           "minimum": 1
         }
       }
@@ -1380,6 +1754,18 @@
           "format": "int64",
           "title": "milliseconds"
         },
+        "posts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parserPostItem"
+          }
+        },
+        "related": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parserShortCompany"
+          }
+        },
         "technologyCategories": {
           "type": "array",
           "items": {
@@ -1393,6 +1779,17 @@
       "properties": {
         "downloadUrl": {
           "type": "string"
+        }
+      }
+    },
+    "parserGetPostsResponse": {
+      "type": "object",
+      "properties": {
+        "posts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parserPostItem"
+          }
         }
       }
     },
@@ -1471,6 +1868,40 @@
         }
       }
     },
+    "parserPhotoItem": {
+      "type": "object",
+      "properties": {
+        "urlM": {
+          "type": "string"
+        },
+        "urlR": {
+          "type": "string"
+        }
+      }
+    },
+    "parserPostItem": {
+      "type": "object",
+      "properties": {
+        "companyId": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "photos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parserPhotoItem"
+          }
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
     "parserSelect": {
       "type": "string",
       "default": "ANY",
@@ -1488,6 +1919,95 @@
         "FEMALE",
         "MALE"
       ]
+    },
+    "parserShortCompanies": {
+      "type": "object",
+      "properties": {
+        "companies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parserShortCompany"
+          }
+        }
+      }
+    },
+    "parserShortCompany": {
+      "type": "object",
+      "properties": {
+        "app": {
+          "$ref": "#/definitions/parserApp"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "category": {
+          "$ref": "#/definitions/categoryCategoryItem"
+        },
+        "city": {
+          "$ref": "#/definitions/cityCityItem"
+        },
+        "email": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "number",
+          "format": "double"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "social": {
+          "$ref": "#/definitions/parserShortSocial"
+        },
+        "title": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "parserShortSocial": {
+      "type": "object",
+      "properties": {
+        "facebook": {
+          "$ref": "#/definitions/parserUrlItem"
+        },
+        "instagram": {
+          "$ref": "#/definitions/parserUrlItem"
+        },
+        "twitter": {
+          "$ref": "#/definitions/parserUrlItem"
+        },
+        "vk": {
+          "$ref": "#/definitions/parserShortVk"
+        },
+        "youtube": {
+          "$ref": "#/definitions/parserUrlItem"
+        }
+      }
+    },
+    "parserShortVk": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "number",
+          "format": "double"
+        },
+        "membersCount": {
+          "type": "number",
+          "format": "double"
+        },
+        "screenName": {
+          "type": "string"
+        }
+      }
     },
     "parserSocial": {
       "type": "object",
