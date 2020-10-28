@@ -6,6 +6,7 @@ import (
 	"github.com/ulule/limiter/v3"
 	"github.com/ulule/limiter/v3/drivers/middleware/stdlib"
 	"github.com/ulule/limiter/v3/drivers/store/redis"
+	"log"
 	"net/http"
 	"strings"
 	"time"
@@ -36,6 +37,8 @@ func init() {
 	Middleware = func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			origin := r.Header.Get("Origin")
+
+			log.Print(origin)
 
 			if origin == "https://leaq.ru" ||
 				origin == "https://api.leaq.ru" ||
