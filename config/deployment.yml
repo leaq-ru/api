@@ -16,7 +16,7 @@ spec:
       annotations:
         linkerd.io/inject: enabled
         config.linkerd.io/proxy-cpu-request: 2m
-        config.linkerd.io/proxy-memory-request: 11Mi
+        config.linkerd.io/proxy-memory-request: 15Mi
     spec:
       imagePullSecrets:
         - name: ghcr
@@ -45,8 +45,8 @@ spec:
               protocol: TCP
           resources:
             requests:
-              cpu: 1m
-              memory: 11Mi
+              cpu: 2m
+              memory: 15Mi
             limits:
               cpu: "1"
               memory: 1Gi
@@ -76,15 +76,10 @@ spec:
                 configMapKeyRef:
                   key: technology
                   name: service
-            - name: REDIS_URL
+            - name: REDIS_CLUSTERURL
               valueFrom:
                 configMapKeyRef:
-                  key: url
-                  name: redis
-            - name: REDIS_MASTER
-              valueFrom:
-                configMapKeyRef:
-                  key: master
+                  key: clusterurl
                   name: redis
             - name: LOGLEVEL
               value: error

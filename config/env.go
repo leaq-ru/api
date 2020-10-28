@@ -12,8 +12,7 @@ type c struct {
 }
 
 type redis struct {
-	URL    string `envconfig:"REDIS_URL"`
-	Master string `envconfig:"REDIS_MASTER"`
+	ClusterURL string `envconfig:"REDIS_CLUSTERURL"`
 }
 
 type http struct {
