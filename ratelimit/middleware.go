@@ -35,10 +35,13 @@ func init() {
 
 	Middleware = func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			if r.Header.Get("Origin") == "https://leaq.ru" ||
+			origin := r.Header.Get("Origin")
+
+			if origin == "https://leaq.ru" ||
+				origin == "https://api.leaq.ru" ||
 				strings.HasPrefix(r.Header.Get("X-Real-Ip"), "10.") ||
 				r.URL.Path == "/healthz" {
-				// no rate limit for own SSR frontend, or k8s probe
+				// no rate limit for own frontend, or k8s probe
 				logger.Log.Debug().Str("path", r.URL.Path).Msg("no rate limit")
 				next.ServeHTTP(w, r)
 				return
