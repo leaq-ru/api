@@ -76,10 +76,10 @@ spec:
                 configMapKeyRef:
                   key: technology
                   name: service
-            - name: REDIS_CLUSTERURL
+            - name: REDIS_RURL
               valueFrom:
                 configMapKeyRef:
-                  key: clusterurl
+                  key: url
                   name: redis
             - name: LOGLEVEL
               value: error
