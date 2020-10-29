@@ -76,7 +76,7 @@ spec:
                 configMapKeyRef:
                   key: technology
                   name: service
-            - name: REDIS_RURL
+            - name: REDIS_URL
               valueFrom:
                 configMapKeyRef:
                   key: url
