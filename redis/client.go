@@ -29,8 +29,6 @@ func init() {
 				Client = rd.NewClusterClient(&rd.ClusterOptions{
 					Addrs: []string{config.Env.Redis.ClusterURL},
 				})
-
-				logger.Must(Client.Ping().Err())
 			}
 		}
 	}()
