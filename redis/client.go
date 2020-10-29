@@ -6,10 +6,10 @@ import (
 	"github.com/nnqq/scr-api/logger"
 )
 
-var Client *rd.ClusterClient
+var Client *rd.Client
 
 func init() {
-	Client := rd.NewClient(&rd.Options{
+	Client = rd.NewClient(&rd.Options{
 		Addr: config.Env.Redis.URL,
 	})
 
