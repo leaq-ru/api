@@ -24,6 +24,7 @@ type service struct {
 	City       string `envconfig:"SERVICE_CITY"`
 	Category   string `envconfig:"SERVICE_CATEGORY"`
 	Technology string `envconfig:"SERVICE_TECHNOLOGY"`
+	User       string `envconfig:"SERVICE_USER"`
 }
 
 var Env c

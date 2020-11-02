@@ -1247,6 +1247,39 @@
         }
       }
     },
+    "/v1/user/vkAuth": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "https://vk.com/dev/Auth",
+        "operationId": "User_VkAuth",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userVkAuthRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userSelfUser"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
     "/v2/company/get": {
       "get": {
         "tags": [
@@ -2234,6 +2267,57 @@
         },
         "version": {
           "type": "string"
+        }
+      }
+    },
+    "userSelfUser": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "photo": {
+          "type": "string"
+        },
+        "photoRec": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        },
+        "vkId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "userVkAuthRequest": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "photo": {
+          "type": "string"
+        },
+        "photoRec": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "integer",
+          "format": "int64"
         }
       }
     }
