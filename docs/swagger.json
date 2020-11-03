@@ -1122,6 +1122,28 @@
         }
       }
     },
+    "/v1/company/getTotalCount": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "Company_GetTotalCount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/parserGetTotalCountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
     "/v1/post/get": {
       "get": {
         "tags": [
@@ -1845,6 +1867,15 @@
           "items": {
             "$ref": "#/definitions/parserFullCompany"
           }
+        }
+      }
+    },
+    "parserGetTotalCountResponse": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
