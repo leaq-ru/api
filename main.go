@@ -50,5 +50,5 @@ func main() {
 
 	mux.Handle("/", gwMux)
 	addr := strings.Join([]string{"0.0.0.0", config.Env.HTTP.Port}, ":")
-	logger.Must(http.ListenAndServe(addr, middleware.AllowCORS(ratelimit.Middleware(mux))))
+	logger.Must(http.ListenAndServe(addr, middleware.AllowCORS(ratelimit.Middleware(middleware.Auth(mux)))))
 }
