@@ -38,6 +38,7 @@ func serveGW(mux *runtime.ServeMux) {
 	logger.Must(category.RegisterCategoryHandlerFromEndpoint(ctx, mux, config.Env.Service.Category, opts))
 	logger.Must(technology.RegisterTechnologyHandlerFromEndpoint(ctx, mux, config.Env.Service.Technology, opts))
 	logger.Must(user.RegisterUserHandlerFromEndpoint(ctx, mux, config.Env.Service.User, opts))
+	logger.Must(user.RegisterRoleHandlerFromEndpoint(ctx, mux, config.Env.Service.User, opts))
 }
 
 func main() {
