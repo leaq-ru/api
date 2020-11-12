@@ -317,6 +317,37 @@
         }
       }
     },
+    "/v1/company/edit": {
+      "patch": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "edit companies where current user is owner or admin",
+        "operationId": "Company_Edit",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/parserEditRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
     "/v1/company/get": {
       "get": {
         "tags": [
@@ -864,6 +895,44 @@
         }
       }
     },
+    "/v1/company/getMy": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "get companies where current user is owner or admin",
+        "operationId": "Company_GetMy",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "opts.skip",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "20 default",
+            "name": "opts.limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/parserShortCompanies"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
     "/v1/company/getPhoneList": {
       "get": {
         "tags": [
@@ -1185,6 +1254,205 @@
             "schema": {
               "$ref": "#/definitions/parserGetPostsResponse"
             }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/role/addCompanyAdmin": {
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "only owner can set admins (up to 50)",
+        "operationId": "Role_AddCompanyAdmin",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userAddCompanyAdminRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/role/applyCompanyOwner": {
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "create request to apply current user as company owner. company can have only one owner",
+        "operationId": "Role_ApplyCompanyOwner",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userApplyCompanyOwnerRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userApplyCompanyOwnerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/role/getManagers": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "operationId": "Role_GetManagers",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "companyId",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "opts.skip",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "20 default",
+            "name": "opts.limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userGetManagersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/role/removeCompanyAdmin": {
+      "delete": {
+        "tags": [
+          "Role"
+        ],
+        "operationId": "Role_RemoveCompanyAdmin",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "companyId",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "userId",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/role/setCompanyOwner": {
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "company owner can move self owner-role to another user. this action is irreversible",
+        "operationId": "Role_SetCompanyOwner",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userSetCompanyOwnerRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/role/verifyCompanyOwner": {
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "operationId": "Role_VerifyCompanyOwner",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userVerifyCompanyOwnerRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
           },
           "default": {
             "description": "An unexpected error response",
@@ -1681,6 +1949,23 @@
         }
       }
     },
+    "optsSkipLimit": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "description": "20 default",
+          "type": "integer",
+          "format": "int64",
+          "maximum": 100,
+          "minimum": 1
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1
+        }
+      }
+    },
     "parserApp": {
       "type": "object",
       "properties": {
@@ -1702,6 +1987,75 @@
           "type": "string"
         },
         "registrationDate": {
+          "type": "string"
+        }
+      }
+    },
+    "parserEditRequest": {
+      "type": "object",
+      "properties": {
+        "addressHouse": {
+          "type": "string"
+        },
+        "addressStreet": {
+          "type": "string"
+        },
+        "appStoreUrl": {
+          "type": "string"
+        },
+        "avatarBase64": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "cityId": {
+          "type": "string"
+        },
+        "companyId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "facebookUrl": {
+          "type": "string"
+        },
+        "googlePlayUrl": {
+          "type": "string"
+        },
+        "inn": {
+          "type": "number",
+          "format": "double"
+        },
+        "instagramUrl": {
+          "type": "string"
+        },
+        "kpp": {
+          "type": "number",
+          "format": "double"
+        },
+        "ogrn": {
+          "type": "number",
+          "format": "double"
+        },
+        "phone": {
+          "type": "number",
+          "format": "double"
+        },
+        "title": {
+          "type": "string"
+        },
+        "twitterUrl": {
+          "type": "string"
+        },
+        "vkUrl": {
+          "type": "string"
+        },
+        "youtubeUrl": {
           "type": "string"
         }
       }
@@ -1826,6 +2180,11 @@
           "items": {
             "$ref": "#/definitions/parserTechnologyCategory"
           }
+        },
+        "verified": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "company has owner"
         }
       }
     },
@@ -2034,6 +2393,11 @@
         },
         "url": {
           "type": "string"
+        },
+        "verified": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "company has owner"
         }
       }
     },
@@ -2301,6 +2665,97 @@
         }
       }
     },
+    "userAddCompanyAdminRequest": {
+      "type": "object",
+      "properties": {
+        "companyId": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "userApplyCompanyOwnerRequest": {
+      "type": "object",
+      "title": "example.com",
+      "properties": {
+        "companyUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "userApplyCompanyOwnerResponse": {
+      "type": "object",
+      "properties": {
+        "metaContent": {
+          "type": "string"
+        },
+        "metaName": {
+          "type": "string"
+        }
+      }
+    },
+    "userCanEditCompanyResponse": {
+      "type": "object",
+      "properties": {
+        "canEdit": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "userGetManagersResponse": {
+      "type": "object",
+      "properties": {
+        "managers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userManagerItem"
+          }
+        }
+      }
+    },
+    "userGetOwnCompaniesResponse": {
+      "type": "object",
+      "properties": {
+        "companyIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "userGrant": {
+      "type": "string",
+      "default": "NONE",
+      "enum": [
+        "NONE",
+        "OWNER",
+        "ADMIN"
+      ]
+    },
+    "userManagerItem": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "grant": {
+          "$ref": "#/definitions/userGrant"
+        },
+        "id": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "photo": {
+          "type": "string"
+        }
+      }
+    },
     "userSelfUser": {
       "type": "object",
       "properties": {
@@ -2328,6 +2783,26 @@
         }
       }
     },
+    "userSetCompanyOwnerRequest": {
+      "type": "object",
+      "properties": {
+        "companyId": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "userVerifyCompanyOwnerRequest": {
+      "type": "object",
+      "title": "example.com",
+      "properties": {
+        "companyUrl": {
+          "type": "string"
+        }
+      }
+    },
     "userVkAuthRequest": {
       "type": "object",
       "properties": {
@@ -2336,5 +2811,18 @@
         }
       }
     }
-  }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "description": "Paste 'Bearer XXXXX', not 'XXXXX'",
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ]
 }
