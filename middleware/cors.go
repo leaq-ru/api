@@ -7,7 +7,7 @@ import (
 
 var c = cors.New(cors.Options{
 	AllowedMethods: []string{http.MethodDelete, http.MethodPost, http.MethodGet, http.MethodPatch, http.MethodHead},
-	AllowedHeaders: []string{"Authorization"},
+	AllowedHeaders: []string{"Authorization", "Content-Type"},
 })
 
 func CORS(next http.Handler) http.Handler {
