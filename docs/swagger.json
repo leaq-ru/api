@@ -2169,6 +2169,10 @@
             "$ref": "#/definitions/parserPostItem"
           }
         },
+        "premium": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "related": {
           "type": "array",
           "items": {
@@ -2378,6 +2382,10 @@
         "phone": {
           "type": "number",
           "format": "double"
+        },
+        "premium": {
+          "type": "boolean",
+          "format": "boolean"
         },
         "slug": {
           "type": "string"
