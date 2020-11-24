@@ -19,6 +19,135 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/v1/billing/createInvoice": {
+      "post": {
+        "tags": [
+          "Billing"
+        ],
+        "operationId": "Billing_CreateInvoice",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingCreateInvoiceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingCreateInvoiceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/billing/getMyBalance": {
+      "get": {
+        "tags": [
+          "Billing"
+        ],
+        "operationId": "Billing_GetMyBalance",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingGetMyBalanceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/billing/renewCompanyPremium": {
+      "post": {
+        "tags": [
+          "Billing"
+        ],
+        "operationId": "Billing_RenewCompanyPremium",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingRenewCompanyPremiumRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/billing/robokassaWebhook/{secret}": {
+      "get": {
+        "tags": [
+          "Billing"
+        ],
+        "operationId": "Billing_RobokassaWebhook",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "secret",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "InvId",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "format": "float",
+            "description": "e.g. 101.66.",
+            "name": "OutSum",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "SignatureValue",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
     "/v1/category/getAll": {
       "get": {
         "tags": [
@@ -1840,6 +1969,45 @@
     }
   },
   "definitions": {
+    "billingCreateInvoiceRequest": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "format": "int64",
+          "title": "russian penny"
+        }
+      }
+    },
+    "billingCreateInvoiceResponse": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "billingGetMyBalanceResponse": {
+      "type": "object",
+      "properties": {
+        "balance": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "billingRenewCompanyPremiumRequest": {
+      "type": "object",
+      "properties": {
+        "companyId": {
+          "type": "string"
+        },
+        "monthAmount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
     "categoryCategoriesResponse": {
       "type": "object",
       "properties": {
