@@ -73,6 +73,43 @@
         }
       }
     },
+    "/v1/billing/getMyInvoices": {
+      "get": {
+        "tags": [
+          "Billing"
+        ],
+        "operationId": "Billing_GetMyInvoices",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "opts.skip",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "20 default",
+            "name": "opts.limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingGetMyInvoicesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
     "/v1/billing/renewCompanyPremium": {
       "post": {
         "tags": [
@@ -1919,6 +1956,15 @@
             "default": "ONE_OF",
             "name": "technologyFindRule",
             "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "companyIds",
+            "in": "query"
           }
         ],
         "responses": {
@@ -1987,6 +2033,30 @@
         }
       }
     },
+    "billingCreditCompanyPremium": {
+      "type": "object",
+      "properties": {
+        "companyId": {
+          "type": "string"
+        },
+        "companySlug": {
+          "type": "string"
+        },
+        "monthAmount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "billingDebitRobokassa": {
+      "type": "object",
+      "properties": {
+        "invoiceId": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
     "billingGetMyBalanceResponse": {
       "type": "object",
       "properties": {
@@ -1995,6 +2065,54 @@
           "format": "int64"
         }
       }
+    },
+    "billingGetMyInvoicesResponse": {
+      "type": "object",
+      "properties": {
+        "invoices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/billingInvoiceItem"
+          }
+        }
+      }
+    },
+    "billingInvoiceItem": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "creditCompanyPremium": {
+          "$ref": "#/definitions/billingCreditCompanyPremium"
+        },
+        "debitRobokassa": {
+          "$ref": "#/definitions/billingDebitRobokassa"
+        },
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/billingKind"
+        },
+        "status": {
+          "$ref": "#/definitions/billingStatus"
+        }
+      }
+    },
+    "billingKind": {
+      "type": "string",
+      "default": "KIND_NONE",
+      "enum": [
+        "KIND_NONE",
+        "DEBIT_ROBOKASSA",
+        "CREDIT_COMPANY_PREMIUM",
+        "DEBIT_MANUAL"
+      ]
     },
     "billingRenewCompanyPremiumRequest": {
       "type": "object",
@@ -2007,6 +2125,15 @@
           "format": "int64"
         }
       }
+    },
+    "billingStatus": {
+      "type": "string",
+      "default": "STATUS_NONE",
+      "enum": [
+        "STATUS_NONE",
+        "PENDING",
+        "SUCCESS"
+      ]
     },
     "categoryCategoriesResponse": {
       "type": "object",
