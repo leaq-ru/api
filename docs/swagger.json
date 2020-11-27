@@ -19,6 +19,172 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/v1/billing/createInvoice": {
+      "post": {
+        "tags": [
+          "Billing"
+        ],
+        "operationId": "Billing_CreateInvoice",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingCreateInvoiceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingCreateInvoiceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/billing/getMyBalance": {
+      "get": {
+        "tags": [
+          "Billing"
+        ],
+        "operationId": "Billing_GetMyBalance",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingGetMyBalanceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/billing/getMyInvoices": {
+      "get": {
+        "tags": [
+          "Billing"
+        ],
+        "operationId": "Billing_GetMyInvoices",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "opts.skip",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "20 default",
+            "name": "opts.limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingGetMyInvoicesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/billing/renewCompanyPremium": {
+      "post": {
+        "tags": [
+          "Billing"
+        ],
+        "operationId": "Billing_RenewCompanyPremium",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingRenewCompanyPremiumRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/billing/robokassaWebhook/{secret}": {
+      "get": {
+        "tags": [
+          "Billing"
+        ],
+        "operationId": "Billing_RobokassaWebhook",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "secret",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "InvId",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "format": "float",
+            "description": "e.g. 101.66.",
+            "name": "OutSum",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "SignatureValue",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
     "/v1/category/getAll": {
       "get": {
         "tags": [
@@ -921,7 +1087,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/parserShortCompanies"
+              "$ref": "#/definitions/parserGetMyResponse"
             }
           },
           "default": {
@@ -1790,6 +1956,15 @@
             "default": "ONE_OF",
             "name": "technologyFindRule",
             "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "companyIds",
+            "in": "query"
           }
         ],
         "responses": {
@@ -1840,6 +2015,126 @@
     }
   },
   "definitions": {
+    "billingCreateInvoiceRequest": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "format": "int64",
+          "title": "russian penny"
+        }
+      }
+    },
+    "billingCreateInvoiceResponse": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "billingCreditCompanyPremium": {
+      "type": "object",
+      "properties": {
+        "companyId": {
+          "type": "string"
+        },
+        "companySlug": {
+          "type": "string"
+        },
+        "monthAmount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "billingDebitRobokassa": {
+      "type": "object",
+      "properties": {
+        "invoiceId": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
+    "billingGetMyBalanceResponse": {
+      "type": "object",
+      "properties": {
+        "balance": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "billingGetMyInvoicesResponse": {
+      "type": "object",
+      "properties": {
+        "invoices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/billingInvoiceItem"
+          }
+        }
+      }
+    },
+    "billingInvoiceItem": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "creditCompanyPremium": {
+          "$ref": "#/definitions/billingCreditCompanyPremium"
+        },
+        "debitRobokassa": {
+          "$ref": "#/definitions/billingDebitRobokassa"
+        },
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/billingKind"
+        },
+        "status": {
+          "$ref": "#/definitions/billingStatus"
+        }
+      }
+    },
+    "billingKind": {
+      "type": "string",
+      "default": "KIND_NONE",
+      "enum": [
+        "KIND_NONE",
+        "DEBIT_ROBOKASSA",
+        "CREDIT_COMPANY_PREMIUM",
+        "DEBIT_MANUAL"
+      ]
+    },
+    "billingRenewCompanyPremiumRequest": {
+      "type": "object",
+      "properties": {
+        "companyId": {
+          "type": "string"
+        },
+        "monthAmount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "billingStatus": {
+      "type": "string",
+      "default": "STATUS_NONE",
+      "enum": [
+        "STATUS_NONE",
+        "PENDING",
+        "SUCCESS"
+      ]
+    },
     "categoryCategoriesResponse": {
       "type": "object",
       "properties": {
@@ -1861,14 +2156,6 @@
           "type": "string"
         },
         "title": {
-          "type": "string"
-        }
-      }
-    },
-    "categoryFindResponse": {
-      "type": "object",
-      "properties": {
-        "categoryId": {
           "type": "string"
         }
       }
@@ -1895,74 +2182,6 @@
         },
         "title": {
           "type": "string"
-        }
-      }
-    },
-    "cityFindResponse": {
-      "type": "object",
-      "properties": {
-        "cityId": {
-          "type": "string"
-        },
-        "isFound": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      }
-    },
-    "optsOpts": {
-      "type": "object",
-      "properties": {
-        "fromId": {
-          "description": "Pagination (skip)",
-          "type": "string"
-        },
-        "limit": {
-          "description": "20 default",
-          "type": "integer",
-          "format": "int64",
-          "maximum": 100,
-          "minimum": 1
-        }
-      }
-    },
-    "optsPage": {
-      "type": "object",
-      "properties": {
-        "excludeIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "limit": {
-          "description": "20 default",
-          "type": "integer",
-          "format": "int64",
-          "maximum": 100,
-          "minimum": 1
-        },
-        "skip": {
-          "type": "integer",
-          "format": "int64",
-          "minimum": 1
-        }
-      }
-    },
-    "optsSkipLimit": {
-      "type": "object",
-      "properties": {
-        "limit": {
-          "description": "20 default",
-          "type": "integer",
-          "format": "int64",
-          "maximum": 100,
-          "minimum": 1
-        },
-        "skip": {
-          "type": "integer",
-          "format": "int64",
-          "minimum": 1
         }
       }
     },
@@ -2059,14 +2278,6 @@
           "type": "string"
         }
       }
-    },
-    "parserFindRule": {
-      "type": "string",
-      "default": "ONE_OF",
-      "enum": [
-        "ONE_OF",
-        "ALL"
-      ]
     },
     "parserFullCompany": {
       "type": "object",
@@ -2169,6 +2380,10 @@
             "$ref": "#/definitions/parserPostItem"
           }
         },
+        "premium": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "related": {
           "type": "array",
           "items": {
@@ -2193,6 +2408,17 @@
       "properties": {
         "downloadUrl": {
           "type": "string"
+        }
+      }
+    },
+    "parserGetMyResponse": {
+      "type": "object",
+      "properties": {
+        "companies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parserMyCompany"
+          }
         }
       }
     },
@@ -2247,12 +2473,57 @@
         "PRIVATE"
       ]
     },
-    "parserIsCompanyAvatarExistsResponse": {
+    "parserMyCompany": {
       "type": "object",
       "properties": {
-        "isExists": {
+        "app": {
+          "$ref": "#/definitions/parserApp"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "category": {
+          "$ref": "#/definitions/categoryCategoryItem"
+        },
+        "city": {
+          "$ref": "#/definitions/cityCityItem"
+        },
+        "email": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "number",
+          "format": "double"
+        },
+        "premium": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "premiumDeadline": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "social": {
+          "$ref": "#/definitions/parserShortSocial"
+        },
+        "title": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "verified": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "company has owner"
         }
       }
     },
@@ -2325,15 +2596,6 @@
         }
       }
     },
-    "parserSelect": {
-      "type": "string",
-      "default": "ANY",
-      "enum": [
-        "ANY",
-        "YES",
-        "NO"
-      ]
-    },
     "parserSex": {
       "type": "string",
       "default": "NONE",
@@ -2378,6 +2640,10 @@
         "phone": {
           "type": "number",
           "format": "double"
+        },
+        "premium": {
+          "type": "boolean",
+          "format": "boolean"
         },
         "slug": {
           "type": "string"
@@ -2527,19 +2793,6 @@
         }
       }
     },
-    "parserVkMembersCount": {
-      "type": "object",
-      "properties": {
-        "from": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "to": {
-          "type": "integer",
-          "format": "int64"
-        }
-      }
-    },
     "protobufAny": {
       "description": "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(\u0026foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := \u0026pb.Foo{...}\n     any, err := ptypes.MarshalAny(foo)\n     ...\n     foo := \u0026pb.Foo{}\n     if err := ptypes.UnmarshalAny(any, foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": \u003cstring\u003e,\n      \"lastName\": \u003cstring\u003e\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }",
       "type": "object",
@@ -2584,28 +2837,6 @@
         },
         "name": {
           "type": "string"
-        }
-      }
-    },
-    "technologyFindResponse": {
-      "type": "object",
-      "properties": {
-        "ids": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "technologyGetByIdsResponse": {
-      "type": "object",
-      "properties": {
-        "technologies": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/technologyTechnologyItem"
-          }
         }
       }
     },
@@ -2696,15 +2927,6 @@
         }
       }
     },
-    "userCanEditCompanyResponse": {
-      "type": "object",
-      "properties": {
-        "canEdit": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      }
-    },
     "userGetManagersResponse": {
       "type": "object",
       "properties": {
@@ -2712,17 +2934,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/userManagerItem"
-          }
-        }
-      }
-    },
-    "userGetOwnCompaniesResponse": {
-      "type": "object",
-      "properties": {
-        "companyIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
           }
         }
       }

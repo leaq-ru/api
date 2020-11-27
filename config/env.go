@@ -1,8 +1,6 @@
 package config
 
-import (
-	"github.com/kelseyhightower/envconfig"
-)
+import "github.com/kelseyhightower/envconfig"
 
 type c struct {
 	HTTP     http
@@ -25,6 +23,7 @@ type service struct {
 	Category   string `envconfig:"SERVICE_CATEGORY"`
 	Technology string `envconfig:"SERVICE_TECHNOLOGY"`
 	User       string `envconfig:"SERVICE_USER"`
+	Billing    string `envconfig:"SERVICE_BILLING"`
 }
 
 var Env c

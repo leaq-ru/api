@@ -7,6 +7,7 @@ import (
 	"github.com/nnqq/scr-api/logger"
 	"github.com/nnqq/scr-api/middleware"
 	"github.com/nnqq/scr-api/ratelimit"
+	"github.com/nnqq/scr-proto/codegen/go/billing"
 	"github.com/nnqq/scr-proto/codegen/go/category"
 	"github.com/nnqq/scr-proto/codegen/go/city"
 	"github.com/nnqq/scr-proto/codegen/go/parser"
@@ -39,6 +40,7 @@ func serveGW(mux *runtime.ServeMux) {
 	logger.Must(technology.RegisterTechnologyHandlerFromEndpoint(ctx, mux, config.Env.Service.Technology, opts))
 	logger.Must(user.RegisterUserHandlerFromEndpoint(ctx, mux, config.Env.Service.User, opts))
 	logger.Must(user.RegisterRoleHandlerFromEndpoint(ctx, mux, config.Env.Service.User, opts))
+	logger.Must(billing.RegisterBillingHandlerFromEndpoint(ctx, mux, config.Env.Service.Billing, opts))
 }
 
 func main() {

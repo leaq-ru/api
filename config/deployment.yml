@@ -81,6 +81,11 @@ spec:
                 configMapKeyRef:
                   key: user
                   name: service
+            - name: SERVICE_BILLING
+              valueFrom:
+                configMapKeyRef:
+                  key: billing
+                  name: service
             - name: REDIS_URL
               valueFrom:
                 configMapKeyRef:
