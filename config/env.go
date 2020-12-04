@@ -24,6 +24,7 @@ type service struct {
 	Technology string `envconfig:"SERVICE_TECHNOLOGY"`
 	User       string `envconfig:"SERVICE_USER"`
 	Billing    string `envconfig:"SERVICE_BILLING"`
+	Exporter   string `envconfig:"SERVICE_EXPORTER"`
 }
 
 var Env c
