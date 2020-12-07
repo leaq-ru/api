@@ -19,10 +19,8 @@ import (
 var Middleware func(http.Handler) http.Handler
 
 func init() {
-	store, err := redis.NewStoreWithOptions(r.Client, limiter.StoreOptions{
-		Prefix: "api",
-	})
-	logger.Must(err)
+	store, e := redis.NewStore(r.Client)
+	logger.Must(e)
 
 	Middleware = func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -73,25 +71,15 @@ func init() {
 				}
 			} else {
 				rateRPS = limiter.Rate{
-					Limit:  3,
+					Limit:  1,
 					Period: time.Second,
 				}
 			}
 
 			opts := limiter.WithTrustForwardHeader(true)
 
-			bottleneckRPS := stdlib.NewMiddleware(limiter.New(store, rateRPS, opts), makeLimitReached("second"))
-			if plan.Premium {
-				bottleneckRPS.Handler(next).ServeHTTP(w, r)
-				return
-			}
-
-			rateRPD := limiter.Rate{
-				Limit:  1000,
-				Period: 24 * time.Hour,
-			}
-			bottleneckRPD := stdlib.NewMiddleware(limiter.New(store, rateRPD, opts), makeLimitReached("day"))
-			bottleneckRPD.Handler(bottleneckRPS.Handler(next)).ServeHTTP(w, r)
+			rps := stdlib.NewMiddleware(limiter.New(store, rateRPS, opts), makeLimitReached("second"))
+			rps.Handler(next).ServeHTTP(w, r)
 		})
 	}
 }

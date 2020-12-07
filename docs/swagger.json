@@ -73,6 +73,36 @@
         }
       }
     },
+    "/v1/billing/getMyDataPlan": {
+      "post": {
+        "tags": [
+          "Billing"
+        ],
+        "operationId": "Billing_GetMyDataPlan",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingGetMyDataPlanResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
     "/v1/billing/getMyInvoices": {
       "get": {
         "tags": [
@@ -123,6 +153,36 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/billingRenewCompanyPremiumRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/billing/renewDataPremium": {
+      "post": {
+        "tags": [
+          "Billing"
+        ],
+        "operationId": "Billing_RenewDataPremium",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingRenewDataPremiumRequest"
             }
           }
         ],
@@ -1379,6 +1439,475 @@
         }
       }
     },
+    "/v1/exporter/exportCompanies": {
+      "get": {
+        "tags": [
+          "Exporter"
+        ],
+        "summary": "returns only first 1000 results even on data-premium plan",
+        "operationId": "Exporter_ExportCompanies",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "cityIds",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "categoryIds",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasEmail",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasPhone",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasOnline",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasInn",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasKpp",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasOgrn",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasAppStore",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasGooglePlay",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasVk",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "vkMembersCount.from",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "vkMembersCount.to",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasInstagram",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasTwitter",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasYoutube",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasFacebook",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "technologyIds",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ONE_OF",
+              "ALL"
+            ],
+            "type": "string",
+            "default": "ONE_OF",
+            "name": "technologyFindRule",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/exporterExportCompaniesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/exporter/exportCompaniesAsync": {
+      "get": {
+        "tags": [
+          "Exporter"
+        ],
+        "summary": "available only on data-premium plan and full result returns in getMyFiles response",
+        "operationId": "Exporter_ExportCompaniesAsync",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "cityIds",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "categoryIds",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasEmail",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasPhone",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasOnline",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasInn",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasKpp",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasOgrn",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasAppStore",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasGooglePlay",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasVk",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "vkMembersCount.from",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "vkMembersCount.to",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasInstagram",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasTwitter",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasYoutube",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ANY",
+              "YES",
+              "NO"
+            ],
+            "type": "string",
+            "default": "ANY",
+            "name": "hasFacebook",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "technologyIds",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ONE_OF",
+              "ALL"
+            ],
+            "type": "string",
+            "default": "ONE_OF",
+            "name": "technologyFindRule",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/exporter/getMyFiles": {
+      "get": {
+        "tags": [
+          "Exporter"
+        ],
+        "operationId": "Exporter_GetMyFiles",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "opts.skip",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "20 default",
+            "name": "opts.limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/exporterGetMyFilesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
     "/v1/post/get": {
       "get": {
         "tags": [
@@ -2048,6 +2577,24 @@
         }
       }
     },
+    "billingCreditDataPremium": {
+      "type": "object",
+      "properties": {
+        "monthAmount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "userFirstName": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "userLastName": {
+          "type": "string"
+        }
+      }
+    },
     "billingDebitRobokassa": {
       "type": "object",
       "properties": {
@@ -2063,6 +2610,18 @@
         "balance": {
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "billingGetMyDataPlanResponse": {
+      "type": "object",
+      "properties": {
+        "premium": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "premiumDeadline": {
+          "type": "string"
         }
       }
     },
@@ -2090,6 +2649,9 @@
         "creditCompanyPremium": {
           "$ref": "#/definitions/billingCreditCompanyPremium"
         },
+        "creditDataPremium": {
+          "$ref": "#/definitions/billingCreditDataPremium"
+        },
         "debitRobokassa": {
           "$ref": "#/definitions/billingDebitRobokassa"
         },
@@ -2111,7 +2673,8 @@
         "KIND_NONE",
         "DEBIT_ROBOKASSA",
         "CREDIT_COMPANY_PREMIUM",
-        "DEBIT_MANUAL"
+        "DEBIT_MANUAL",
+        "CREDIT_DATA_PREMIUM"
       ]
     },
     "billingRenewCompanyPremiumRequest": {
@@ -2120,6 +2683,15 @@
         "companyId": {
           "type": "string"
         },
+        "monthAmount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "billingRenewDataPremiumRequest": {
+      "type": "object",
+      "properties": {
         "monthAmount": {
           "type": "integer",
           "format": "int64"
@@ -2182,6 +2754,42 @@
         },
         "title": {
           "type": "string"
+        }
+      }
+    },
+    "exporterExportCompaniesResponse": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "exporterFile": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "exporterGetMyFilesResponse": {
+      "type": "object",
+      "properties": {
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/exporterFile"
+          }
         }
       }
     },

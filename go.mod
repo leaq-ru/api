@@ -6,7 +6,7 @@ require (
 	github.com/go-redis/redis/v7 v7.4.0
 	github.com/grpc-ecosystem/grpc-gateway v1.14.6
 	github.com/kelseyhightower/envconfig v1.4.0
-	github.com/nnqq/scr-proto v1.17.1
+	github.com/nnqq/scr-proto v1.17.2
 	github.com/rs/cors v1.7.0
 	github.com/rs/zerolog v1.19.0
 	github.com/stretchr/testify v1.6.1 // indirect
