@@ -24,7 +24,7 @@ func init() {
 
 	Middleware = func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			const headerDataPremium = "Grpc-Metadata-data-premium"
+			const headerDataPremium = "Grpc-Metadata-Data-Premium"
 			r.Header.Set(headerDataPremium, "")
 
 			origin := r.Header.Get("Origin")

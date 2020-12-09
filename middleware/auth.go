@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-const HeaderUserID = "Grpc-Metadata-user-id"
+const HeaderUserID = "Grpc-Metadata-User-Id"
 
 func Auth(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
