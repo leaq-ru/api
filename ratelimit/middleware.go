@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/nnqq/scr-api/call"
+	"github.com/nnqq/scr-api/config"
 	"github.com/nnqq/scr-api/logger"
 	"github.com/nnqq/scr-api/middleware"
 	r "github.com/nnqq/scr-api/redis"
@@ -33,8 +34,9 @@ func init() {
 			if origin == "https://leaq.ru" ||
 				strings.HasPrefix(r.Header.Get("X-Real-Ip"), "10.") ||
 				strings.HasPrefix(path, "/docs/") ||
-				path == "/healthz" {
-				// no rate limit for own frontend, or k8s probe
+				path == "/healthz" ||
+				path == "/v1/billing/robokassaWebhook/"+config.Env.Robokassa.WebhookSecret {
+				// no rate limit for own frontend, or k8s probe, or Robokassa webhook with valid secret
 				logger.Log.Debug().Str("path", path).Msg("no rate limit")
 				next.ServeHTTP(w, r)
 				return

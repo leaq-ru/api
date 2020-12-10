@@ -96,6 +96,11 @@ spec:
                 configMapKeyRef:
                   key: url
                   name: redis
+            - name: ROBOKASSA_WEBHOOKSECRET
+              valueFrom:
+                secretKeyRef:
+                  key: webhooksecret
+                  name: robokassa
             - name: LOGLEVEL
               value: error
 
