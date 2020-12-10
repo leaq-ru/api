@@ -73,6 +73,36 @@
         }
       }
     },
+    "/v1/billing/getMyDataPlan": {
+      "post": {
+        "tags": [
+          "Billing"
+        ],
+        "operationId": "Billing_GetMyDataPlan",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingGetMyDataPlanResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
     "/v1/billing/getMyInvoices": {
       "get": {
         "tags": [
@@ -140,6 +170,36 @@
         }
       }
     },
+    "/v1/billing/renewDataPremium": {
+      "post": {
+        "tags": [
+          "Billing"
+        ],
+        "operationId": "Billing_RenewDataPremium",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingRenewDataPremiumRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
     "/v1/billing/robokassaWebhook/{secret}": {
       "get": {
         "tags": [
@@ -174,7 +234,9 @@
         "responses": {
           "200": {
             "description": "A successful response.",
-            "schema": {}
+            "schema": {
+              "type": "string"
+            }
           },
           "default": {
             "description": "An unexpected error response",
@@ -2048,6 +2110,24 @@
         }
       }
     },
+    "billingCreditDataPremium": {
+      "type": "object",
+      "properties": {
+        "monthAmount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "userFirstName": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "userLastName": {
+          "type": "string"
+        }
+      }
+    },
     "billingDebitRobokassa": {
       "type": "object",
       "properties": {
@@ -2063,6 +2143,18 @@
         "balance": {
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "billingGetMyDataPlanResponse": {
+      "type": "object",
+      "properties": {
+        "premium": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "premiumDeadline": {
+          "type": "string"
         }
       }
     },
@@ -2090,6 +2182,9 @@
         "creditCompanyPremium": {
           "$ref": "#/definitions/billingCreditCompanyPremium"
         },
+        "creditDataPremium": {
+          "$ref": "#/definitions/billingCreditDataPremium"
+        },
         "debitRobokassa": {
           "$ref": "#/definitions/billingDebitRobokassa"
         },
@@ -2111,7 +2206,8 @@
         "KIND_NONE",
         "DEBIT_ROBOKASSA",
         "CREDIT_COMPANY_PREMIUM",
-        "DEBIT_MANUAL"
+        "DEBIT_MANUAL",
+        "CREDIT_DATA_PREMIUM"
       ]
     },
     "billingRenewCompanyPremiumRequest": {
@@ -2120,6 +2216,15 @@
         "companyId": {
           "type": "string"
         },
+        "monthAmount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "billingRenewDataPremiumRequest": {
+      "type": "object",
+      "properties": {
         "monthAmount": {
           "type": "integer",
           "format": "int64"
