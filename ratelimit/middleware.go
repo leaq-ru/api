@@ -32,6 +32,7 @@ func init() {
 			path := r.URL.Path
 
 			if origin == "https://leaq.ru" ||
+				origin == "http://leaq.local" ||
 				strings.HasPrefix(r.Header.Get("X-Real-Ip"), "10.") ||
 				strings.HasPrefix(path, "/docs/") ||
 				path == "/healthz" ||
@@ -44,29 +45,32 @@ func init() {
 
 			logger.Log.Debug().Str("path", path).Msg("with rate limit")
 
-			ctx, cancel := context.WithTimeout(r.Context(), 10*time.Second)
-			defer cancel()
+			userID := r.Header.Get(middleware.HeaderUserID)
+			var premium bool
+			if userID != "" {
+				ctx, cancel := context.WithTimeout(r.Context(), 10*time.Second)
+				defer cancel()
 
-			plan, err := call.Billing.GetDataPlan(ctx, &billing.GetDataPlanRequest{
-				UserId: r.Header.Get(middleware.HeaderUserID),
-			})
-			if err != nil {
-				logger.Log.Error().Err(err).Send()
-				w.WriteHeader(http.StatusUnauthorized)
-
-				_, err = w.Write(nil)
+				plan, err := call.Billing.GetDataPlan(ctx, &billing.GetDataPlanRequest{
+					UserId: userID,
+				})
 				if err != nil {
 					logger.Log.Error().Err(err).Send()
-				}
-				return
-			}
+					w.WriteHeader(http.StatusUnauthorized)
 
-			if plan.Premium {
-				r.Header.Set(headerDataPremium, "true")
+					_, err = w.Write(nil)
+					if err != nil {
+						logger.Log.Error().Err(err).Send()
+					}
+					return
+				}
+
+				premium = plan.GetPremium()
 			}
 
 			var rateRPS limiter.Rate
-			if plan.Premium {
+			if premium {
+				r.Header.Set(headerDataPremium, "true")
 				rateRPS = limiter.Rate{
 					Limit:  30,
 					Period: time.Second,
