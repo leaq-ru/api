@@ -3,10 +3,15 @@ package config
 import "github.com/kelseyhightower/envconfig"
 
 type c struct {
-	HTTP     http
-	Service  service
-	Redis    redis
-	LogLevel string `envconfig:"LOGLEVEL"`
+	HTTP      http
+	Service   service
+	Redis     redis
+	Robokassa robokassa
+	LogLevel  string `envconfig:"LOGLEVEL"`
+}
+
+type robokassa struct {
+	WebhookSecret string `envconfig:"ROBOKASSA_WEBHOOKSECRET"`
 }
 
 type redis struct {
@@ -24,6 +29,7 @@ type service struct {
 	Technology string `envconfig:"SERVICE_TECHNOLOGY"`
 	User       string `envconfig:"SERVICE_USER"`
 	Billing    string `envconfig:"SERVICE_BILLING"`
+	Exporter   string `envconfig:"SERVICE_EXPORTER"`
 }
 
 var Env c

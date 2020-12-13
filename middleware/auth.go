@@ -10,11 +10,12 @@ import (
 	"time"
 )
 
+const HeaderUserID = "Grpc-Metadata-User-Id"
+
 func Auth(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		const headerUserID = "Grpc-Metadata-user-id"
 
-		r.Header.Set(headerUserID, "")
+		r.Header.Set(HeaderUserID, "")
 
 		token := strings.TrimPrefix(r.Header.Get("Authorization"), "Bearer ")
 		if token != "" {
@@ -35,7 +36,7 @@ func Auth(next http.Handler) http.Handler {
 				return
 			}
 
-			r.Header.Set(headerUserID, authUser.GetId())
+			r.Header.Set(HeaderUserID, authUser.GetId())
 		}
 
 		next.ServeHTTP(w, r)

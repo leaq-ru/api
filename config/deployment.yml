@@ -15,7 +15,7 @@ spec:
         app: api
       annotations:
         linkerd.io/inject: enabled
-        config.linkerd.io/proxy-cpu-request: 2m
+        config.linkerd.io/proxy-cpu-request: 3m
         config.linkerd.io/proxy-memory-request: 15Mi
     spec:
       imagePullSecrets:
@@ -45,7 +45,7 @@ spec:
               protocol: TCP
           resources:
             requests:
-              cpu: 2m
+              cpu: 5m
               memory: 15Mi
             limits:
               cpu: "1"
@@ -86,11 +86,21 @@ spec:
                 configMapKeyRef:
                   key: billing
                   name: service
+            - name: SERVICE_EXPORTER
+              valueFrom:
+                configMapKeyRef:
+                  key: exporter
+                  name: service
             - name: REDIS_URL
               valueFrom:
                 configMapKeyRef:
                   key: url
                   name: redis
+            - name: ROBOKASSA_WEBHOOKSECRET
+              valueFrom:
+                secretKeyRef:
+                  key: webhooksecret
+                  name: robokassa
             - name: LOGLEVEL
               value: error
 
