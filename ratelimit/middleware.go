@@ -28,23 +28,6 @@ func init() {
 			const headerDataPremium = "Grpc-Metadata-Data-Premium"
 			r.Header.Set(headerDataPremium, "")
 
-			origin := r.Header.Get("Origin")
-			path := r.URL.Path
-
-			if origin == "https://leaq.ru" ||
-				origin == "http://leaq.local" ||
-				strings.HasPrefix(r.Header.Get("X-Real-Ip"), "10.") ||
-				strings.HasPrefix(path, "/docs/") ||
-				path == "/healthz" ||
-				path == "/v1/billing/robokassaWebhook/"+config.Env.Robokassa.WebhookSecret {
-				// no rate limit for own frontend, or k8s probe, or Robokassa webhook with valid secret
-				logger.Log.Debug().Str("path", path).Msg("no rate limit")
-				next.ServeHTTP(w, r)
-				return
-			}
-
-			logger.Log.Debug().Str("path", path).Msg("with rate limit")
-
 			userID := r.Header.Get(middleware.HeaderUserID)
 			var premium bool
 			if userID != "" {
@@ -65,12 +48,31 @@ func init() {
 					return
 				}
 
-				premium = plan.GetPremium()
+				if plan.GetPremium() {
+					premium = plan.GetPremium()
+					r.Header.Set(headerDataPremium, "true")
+				}
 			}
+
+			origin := r.Header.Get("Origin")
+			path := r.URL.Path
+
+			if origin == "https://leaq.ru" ||
+				origin == "http://leaq.local" ||
+				strings.HasPrefix(r.Header.Get("X-Real-Ip"), "10.") ||
+				strings.HasPrefix(path, "/docs/") ||
+				path == "/healthz" ||
+				path == "/v1/billing/robokassaWebhook/"+config.Env.Robokassa.WebhookSecret {
+				// no rate limit for own frontend, or k8s probe, or Robokassa webhook with valid secret
+				logger.Log.Debug().Str("path", path).Msg("no rate limit")
+				next.ServeHTTP(w, r)
+				return
+			}
+
+			logger.Log.Debug().Str("path", path).Msg("with rate limit")
 
 			var rateRPS limiter.Rate
 			if premium {
-				r.Header.Set(headerDataPremium, "true")
 				rateRPS = limiter.Rate{
 					Limit:  30,
 					Period: time.Second,

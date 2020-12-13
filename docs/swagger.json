@@ -2577,15 +2577,6 @@
         "monthAmount": {
           "type": "integer",
           "format": "int64"
-        },
-        "userFirstName": {
-          "type": "string"
-        },
-        "userId": {
-          "type": "string"
-        },
-        "userLastName": {
-          "type": "string"
         }
       }
     },
