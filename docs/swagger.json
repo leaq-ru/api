@@ -2765,11 +2765,22 @@
         "createdAt": {
           "type": "string"
         },
+        "currentCount": {
+          "type": "integer",
+          "format": "int64"
+        },
         "id": {
           "type": "string"
         },
         "name": {
           "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/exporterStatus"
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int64"
         },
         "url": {
           "type": "string"
@@ -2786,6 +2797,17 @@
           }
         }
       }
+    },
+    "exporterStatus": {
+      "type": "string",
+      "default": "NONE",
+      "enum": [
+        "NONE",
+        "PENDING",
+        "IN_PROGRESS",
+        "SUCCESS",
+        "FAIL"
+      ]
     },
     "parserApp": {
       "type": "object",
