@@ -58,7 +58,6 @@ func init() {
 			path := r.URL.Path
 
 			if origin == "https://leaq.ru" ||
-				origin == "http://leaq.local" ||
 				strings.HasPrefix(r.Header.Get("X-Real-Ip"), "10.") ||
 				strings.HasPrefix(path, "/docs/") ||
 				path == "/healthz" ||
