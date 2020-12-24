@@ -57,7 +57,8 @@ func init() {
 			origin := r.Header.Get("Origin")
 			path := r.URL.Path
 
-			if origin == "https://leaq.ru" ||
+			if config.Env.DisableRateLimit == "true" ||
+				origin == "https://leaq.ru" ||
 				strings.HasPrefix(r.Header.Get("X-Real-Ip"), "10.") ||
 				strings.HasPrefix(path, "/docs/") ||
 				path == "/healthz" ||
