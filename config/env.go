@@ -3,11 +3,12 @@ package config
 import "github.com/kelseyhightower/envconfig"
 
 type c struct {
-	HTTP      http
-	Service   service
-	Redis     redis
-	Robokassa robokassa
-	LogLevel  string `envconfig:"LOGLEVEL"`
+	HTTP             http
+	Service          service
+	Redis            redis
+	Robokassa        robokassa
+	DisableRateLimit string `envconfig:"DISABLERATELIMIT"`
+	LogLevel         string `envconfig:"LOGLEVEL"`
 }
 
 type robokassa struct {
