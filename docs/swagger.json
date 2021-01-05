@@ -10,7 +10,7 @@
   ],
   "swagger": "2.0",
   "info": {
-    "description": "Доступ к API без ограничений на кол-во запросов в день/месяц. Ограничение 1 запрос в секунду с одного IP для бесплатного тарифа, и 30 для платного. Подробнее о тарифах: https://leaq.ru/plans#data \n\n Для платного тарифа, передавайте токен с https://leaq.ru/account/profile в заголоке 'Authorization: Bearer TOKEN'",
+    "description": "Доступ к API без ограничений на кол-во запросов в день/месяц. Ограничение 1 запрос в секунду с одного IP для бесплатного тарифа, и 30 для платного. Подробнее о тарифах: https://leaq.ru/plans#data \n\n Для платного тарифа, передавайте токен с https://leaq.ru/account/profile в заголовке 'Authorization: Bearer TOKEN'",
     "title": "LEAQ API",
     "contact": {
       "name": "Поддержка",
