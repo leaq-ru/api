@@ -10,7 +10,7 @@
   ],
   "swagger": "2.0",
   "info": {
-    "description": "Доступ к API без ограничений на кол-во запросов в день/месяц. Ограничение 1 запрос в секунду с одного IP для бесплатного тарифа, и 30 для платного. Подробнее о тарифах: https://leaq.ru/plans#data",
+    "description": "Доступ к API без ограничений на кол-во запросов в день/месяц. Ограничение 1 запрос в секунду с одного IP для бесплатного тарифа, и 30 для платного. Подробнее о тарифах: https://leaq.ru/plans#data \n\n Для платного тарифа, передавайте токен с https://leaq.ru/account/profile в заголоке 'Authorization: Bearer TOKEN'",
     "title": "LEAQ API",
     "contact": {
       "name": "Поддержка",
@@ -2800,6 +2800,29 @@
         "FAIL"
       ]
     },
+    "optsPage": {
+      "type": "object",
+      "properties": {
+        "excludeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limit": {
+          "description": "20 default",
+          "type": "integer",
+          "format": "int64",
+          "maximum": 100,
+          "minimum": 1
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1
+        }
+      }
+    },
     "parserApp": {
       "type": "object",
       "properties": {
@@ -2893,6 +2916,14 @@
           "type": "string"
         }
       }
+    },
+    "parserFindRule": {
+      "type": "string",
+      "default": "ONE_OF",
+      "enum": [
+        "ONE_OF",
+        "ALL"
+      ]
     },
     "parserFullCompany": {
       "type": "object",
@@ -3211,6 +3242,15 @@
         }
       }
     },
+    "parserSelect": {
+      "type": "string",
+      "default": "ANY",
+      "enum": [
+        "ANY",
+        "YES",
+        "NO"
+      ]
+    },
     "parserSex": {
       "type": "string",
       "default": "NONE",
@@ -3405,6 +3445,19 @@
         },
         "screenName": {
           "type": "string"
+        }
+      }
+    },
+    "parserVkMembersCount": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "to": {
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
