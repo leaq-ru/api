@@ -2231,7 +2231,6 @@
         "tags": [
           "User"
         ],
-        "summary": "https://vk.com/dev/Auth",
         "operationId": "User_VkAuth",
         "parameters": [
           {
@@ -2240,6 +2239,38 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/userVkAuthRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userSelfUser"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/user/yandexAuth": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "User_YandexAuth",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userYandexAuthRequest"
             }
           }
         ],
@@ -3683,6 +3714,14 @@
       }
     },
     "userVkAuthRequest": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        }
+      }
+    },
+    "userYandexAuthRequest": {
       "type": "object",
       "properties": {
         "code": {
