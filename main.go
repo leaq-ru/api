@@ -39,6 +39,7 @@ func serveGW(mux *runtime.ServeMux) {
 	logger.Must(city.RegisterCityHandlerFromEndpoint(ctx, mux, config.Env.Service.City, opts))
 	logger.Must(category.RegisterCategoryHandlerFromEndpoint(ctx, mux, config.Env.Service.Category, opts))
 	logger.Must(technology.RegisterTechnologyHandlerFromEndpoint(ctx, mux, config.Env.Service.Technology, opts))
+	logger.Must(technology.RegisterDnsHandlerFromEndpoint(ctx, mux, config.Env.Service.Technology, opts))
 	logger.Must(user.RegisterUserHandlerFromEndpoint(ctx, mux, config.Env.Service.User, opts))
 	logger.Must(user.RegisterRoleHandlerFromEndpoint(ctx, mux, config.Env.Service.User, opts))
 	logger.Must(billing.RegisterBillingHandlerFromEndpoint(ctx, mux, config.Env.Service.Billing, opts))

@@ -1097,6 +1097,15 @@
             "default": "ONE_OF",
             "name": "technologyFindRule",
             "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "dnsIds",
+            "in": "query"
           }
         ],
         "responses": {
@@ -1351,6 +1360,15 @@
             "default": "ONE_OF",
             "name": "technologyFindRule",
             "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "dnsIds",
+            "in": "query"
           }
         ],
         "responses": {
@@ -1422,6 +1440,51 @@
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/parserGetTotalCountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/dns/getHints": {
+      "get": {
+        "tags": [
+          "Dns"
+        ],
+        "operationId": "Dns_GetDnsHints",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "name",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "excludeIds",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "20 default",
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/technologyGetDnsHintsResponse"
             }
           },
           "default": {
@@ -1631,6 +1694,15 @@
             "type": "string",
             "default": "ONE_OF",
             "name": "technologyFindRule",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "dnsIds",
             "in": "query"
           }
         ],
@@ -1848,6 +1920,15 @@
             "type": "string",
             "default": "ONE_OF",
             "name": "technologyFindRule",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "dnsIds",
             "in": "query"
           }
         ],
@@ -2519,6 +2600,15 @@
             "collectionFormat": "multi",
             "name": "companyIds",
             "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "dnsIds",
+            "in": "query"
           }
         ],
         "responses": {
@@ -2865,6 +2955,17 @@
         }
       }
     },
+    "parserDnsItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "parserDomain": {
       "type": "object",
       "properties": {
@@ -3043,6 +3144,12 @@
     "parserGetBySlugResponse": {
       "type": "object",
       "properties": {
+        "dns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parserDnsItem"
+          }
+        },
         "fullCompany": {
           "$ref": "#/definitions/parserFullCompany"
         },
@@ -3539,11 +3646,33 @@
         }
       }
     },
+    "technologyDnsItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "technologyGetBySlugResponse": {
       "type": "object",
       "properties": {
         "technology": {
           "$ref": "#/definitions/technologyTechnologyItem"
+        }
+      }
+    },
+    "technologyGetDnsHintsResponse": {
+      "type": "object",
+      "properties": {
+        "technologies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/technologyDnsItem"
+          }
         }
       }
     },
