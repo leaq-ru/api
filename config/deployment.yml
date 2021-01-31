@@ -5,7 +5,7 @@ metadata:
   labels:
     app: api
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: api
@@ -15,8 +15,8 @@ spec:
         app: api
       annotations:
         linkerd.io/inject: enabled
-        config.linkerd.io/proxy-cpu-request: 25m
-        config.linkerd.io/proxy-memory-request: 25Mi
+        config.linkerd.io/proxy-cpu-request: 15m
+        config.linkerd.io/proxy-memory-request: 15Mi
     spec:
       imagePullSecrets:
         - name: ghcr
@@ -39,8 +39,8 @@ spec:
               protocol: TCP
           resources:
             requests:
-              cpu: 25m
-              memory: 25Mi
+              cpu: 15m
+              memory: 15Mi
             limits:
               cpu: "1"
               memory: 1Gi
