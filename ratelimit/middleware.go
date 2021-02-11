@@ -55,21 +55,30 @@ func init() {
 			}
 
 			origin := r.Header.Get("Origin")
+			xRealIp := r.Header.Get("X-Real-Ip")
+			xForwardedFor := r.Header.Get("X-Forwarded-For")
 			path := r.URL.Path
+
+			dbg := logger.Log.Debug().
+				Str("origin", origin).
+				Str("xRealIp", xRealIp).
+				Str("xForwardedFor", xForwardedFor).
+				Str("path", path).
+				Bool("premium", premium)
 
 			if config.Env.DisableRateLimit == "true" ||
 				origin == "https://leaq.ru" ||
-				strings.HasPrefix(r.Header.Get("X-Real-Ip"), "10.") ||
+				strings.HasPrefix(xRealIp, "10.") ||
 				strings.HasPrefix(path, "/docs/") ||
 				path == "/healthz" ||
 				path == "/v1/billing/robokassaWebhook/"+config.Env.Robokassa.WebhookSecret {
 				// no rate limit for own frontend, or k8s probe, or Robokassa webhook with valid secret
-				logger.Log.Debug().Str("path", path).Msg("no rate limit")
+				dbg.Msg("no rate limit")
 				next.ServeHTTP(w, r)
 				return
 			}
 
-			logger.Log.Debug().Str("path", path).Msg("with rate limit")
+			dbg.Msg("with rate limit")
 
 			var rateRPS limiter.Rate
 			if premium {
