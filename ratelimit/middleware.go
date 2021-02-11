@@ -68,7 +68,7 @@ func init() {
 
 			if config.Env.DisableRateLimit == "true" ||
 				origin == "https://leaq.ru" ||
-				strings.HasPrefix(xRealIp, "10.") ||
+				xRealIp == "" ||
 				strings.HasPrefix(path, "/docs/") ||
 				path == "/healthz" ||
 				path == "/v1/billing/robokassaWebhook/"+config.Env.Robokassa.WebhookSecret {
