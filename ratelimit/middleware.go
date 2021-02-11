@@ -70,7 +70,6 @@ func init() {
 				origin == "https://leaq.ru" ||
 				xRealIp == "" ||
 				strings.HasPrefix(path, "/docs/") ||
-				path == "/healthz" ||
 				path == "/v1/billing/robokassaWebhook/"+config.Env.Robokassa.WebhookSecret {
 				// no rate limit for own frontend, or k8s probe, or Robokassa webhook with valid secret
 				dbg.Msg("no rate limit")
