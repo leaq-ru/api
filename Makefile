@@ -1,4 +1,4 @@
-PROTO_VER       := v1.19.1
+PROTO_VER       := v1.20.5
 SWAGGER_PATH    := $(GOPATH)/pkg/mod/github.com/nnqq/scr-proto@$(PROTO_VER)/codegen/swagger
 INFO_PATH       := $(SWAGGER_PATH)/swagger/info.swagger.json
 COMPANY_PATH    := $(SWAGGER_PATH)/parser/company.swagger.json
@@ -11,6 +11,7 @@ USER_PATH       := $(SWAGGER_PATH)/user/user.swagger.json
 ROLE_PATH       := $(SWAGGER_PATH)/user/role.swagger.json
 BILLING_PATH    := $(SWAGGER_PATH)/billing/billing.swagger.json
 EXPORTER_PATH   := $(SWAGGER_PATH)/exporter/exporter.swagger.json
+ORG_PATH        := $(SWAGGER_PATH)/org/org.swagger.json
 
 # https://github.com/go-swagger/go-swagger
 all:
@@ -27,6 +28,7 @@ all:
 		$(ROLE_PATH) \
 		$(BILLING_PATH) \
 		$(EXPORTER_PATH) \
+		$(ORG_PATH) \
 		-o docs/swagger.json;
 	docker run --rm -it -e GOPATH=$(HOME)/go:/go -v $(HOME):$(HOME) -w $(shell pwd) quay.io/goswagger/swagger:v0.25.0 flatten \
 		docs/swagger.json \

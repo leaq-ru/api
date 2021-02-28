@@ -15,8 +15,8 @@ spec:
         app: api
       annotations:
         linkerd.io/inject: enabled
-        config.linkerd.io/proxy-cpu-request: 15m
-        config.linkerd.io/proxy-memory-request: 15Mi
+        config.linkerd.io/proxy-cpu-request: 20m
+        config.linkerd.io/proxy-memory-request: 20Mi
     spec:
       imagePullSecrets:
         - name: ghcr
@@ -39,8 +39,8 @@ spec:
               protocol: TCP
           resources:
             requests:
-              cpu: 15m
-              memory: 15Mi
+              cpu: 20m
+              memory: 20Mi
             limits:
               cpu: "1"
               memory: 1Gi
@@ -84,6 +84,11 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: exporter
+                  name: service
+            - name: SERVICE_ORG
+              valueFrom:
+                configMapKeyRef:
+                  key: org
                   name: service
             - name: REDIS_URL
               valueFrom:

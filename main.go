@@ -11,6 +11,7 @@ import (
 	"github.com/nnqq/scr-proto/codegen/go/category"
 	"github.com/nnqq/scr-proto/codegen/go/city"
 	"github.com/nnqq/scr-proto/codegen/go/exporter"
+	"github.com/nnqq/scr-proto/codegen/go/org"
 	"github.com/nnqq/scr-proto/codegen/go/parser"
 	"github.com/nnqq/scr-proto/codegen/go/technology"
 	"github.com/nnqq/scr-proto/codegen/go/user"
@@ -44,6 +45,7 @@ func serveGW(mux *runtime.ServeMux) {
 	logger.Must(user.RegisterRoleHandlerFromEndpoint(ctx, mux, config.Env.Service.User, opts))
 	logger.Must(billing.RegisterBillingHandlerFromEndpoint(ctx, mux, config.Env.Service.Billing, opts))
 	logger.Must(exporter.RegisterExporterHandlerFromEndpoint(ctx, mux, config.Env.Service.Exporter, opts))
+	logger.Must(org.RegisterOrgHandlerFromEndpoint(ctx, mux, config.Env.Service.Org, opts))
 }
 
 func main() {

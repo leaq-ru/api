@@ -1983,6 +1983,474 @@
         }
       }
     },
+    "/v1/org/get": {
+      "get": {
+        "tags": [
+          "Org"
+        ],
+        "operationId": "Org_Get",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "opts.skip",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "20 default",
+            "name": "opts.limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orgGetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/org/getAreaBySlug": {
+      "get": {
+        "tags": [
+          "Org"
+        ],
+        "operationId": "Org_GetAreaBySlug",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "slug",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orgGetAreaBySlugResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/org/getByAreaId": {
+      "get": {
+        "tags": [
+          "Org"
+        ],
+        "operationId": "Org_GetByAreaId",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "opts.skip",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "20 default",
+            "name": "opts.limit",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "areaId",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orgGetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/org/getByLocationId": {
+      "get": {
+        "tags": [
+          "Org"
+        ],
+        "operationId": "Org_GetByLocationId",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "opts.skip",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "20 default",
+            "name": "opts.limit",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "locationId",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orgGetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/org/getByManagerId": {
+      "get": {
+        "tags": [
+          "Org"
+        ],
+        "operationId": "Org_GetByManagerId",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "opts.skip",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "20 default",
+            "name": "opts.limit",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "managerId",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orgGetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/org/getByMetroId": {
+      "get": {
+        "tags": [
+          "Org"
+        ],
+        "operationId": "Org_GetByMetroId",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "opts.skip",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "20 default",
+            "name": "opts.limit",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "metroId",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orgGetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/org/getByOkvedId": {
+      "get": {
+        "tags": [
+          "Org"
+        ],
+        "operationId": "Org_GetByOkvedId",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "opts.skip",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "20 default",
+            "name": "opts.limit",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "okvedId",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orgGetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/org/getBySlug": {
+      "get": {
+        "tags": [
+          "Org"
+        ],
+        "operationId": "Org_GetBySlug",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "slug",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orgGetBySlugResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/org/getLocationBySlug": {
+      "get": {
+        "tags": [
+          "Org"
+        ],
+        "operationId": "Org_GetLocationBySlug",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "slug",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orgGetLocationBySlugResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/org/getManagerBySlug": {
+      "get": {
+        "tags": [
+          "Org"
+        ],
+        "operationId": "Org_GetManagerBySlug",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "slug",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orgGetManagerBySlugResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/org/getMetroBySlug": {
+      "get": {
+        "tags": [
+          "Org"
+        ],
+        "operationId": "Org_GetMetroBySlug",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "slug",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orgGetMetroBySlugResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/org/getOkvedBySlug": {
+      "get": {
+        "tags": [
+          "Org"
+        ],
+        "operationId": "Org_GetOkvedBySlug",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "slug",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orgGetOkvedBySlugResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/org/getRelated": {
+      "get": {
+        "tags": [
+          "Org"
+        ],
+        "operationId": "Org_GetRelated",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "opts.skip",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "20 default",
+            "name": "opts.limit",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "areaId",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "okvedId",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orgGetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
     "/v1/post/get": {
       "get": {
         "tags": [
@@ -2943,6 +3411,440 @@
           "minimum": 1
         }
       }
+    },
+    "orgAreaFullItem": {
+      "type": "object",
+      "properties": {
+        "fiasId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "kladrId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "typeFull": {
+          "type": "string"
+        }
+      }
+    },
+    "orgAreaItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        }
+      }
+    },
+    "orgBranch": {
+      "type": "object",
+      "properties": {
+        "area": {
+          "$ref": "#/definitions/orgAreaItem"
+        },
+        "location": {
+          "$ref": "#/definitions/orgLocationItem"
+        },
+        "name": {
+          "type": "string"
+        },
+        "statusKind": {
+          "$ref": "#/definitions/orgStatusKind"
+        }
+      }
+    },
+    "orgGetAreaBySlugResponse": {
+      "type": "object",
+      "properties": {
+        "area": {
+          "$ref": "#/definitions/orgAreaFullItem"
+        }
+      }
+    },
+    "orgGetBySlugResponse": {
+      "type": "object",
+      "properties": {
+        "branches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/orgBranch"
+          }
+        },
+        "main": {
+          "$ref": "#/definitions/orgMain"
+        }
+      }
+    },
+    "orgGetLocationBySlugResponse": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/orgLocationItem"
+        }
+      }
+    },
+    "orgGetManagerBySlugResponse": {
+      "type": "object",
+      "properties": {
+        "manager": {
+          "$ref": "#/definitions/orgManagerItem"
+        }
+      }
+    },
+    "orgGetMetroBySlugResponse": {
+      "type": "object",
+      "properties": {
+        "metro": {
+          "$ref": "#/definitions/orgMetroFullItem"
+        }
+      }
+    },
+    "orgGetOkvedBySlugResponse": {
+      "type": "object",
+      "properties": {
+        "okved": {
+          "$ref": "#/definitions/orgOkvedFullItem"
+        }
+      }
+    },
+    "orgGetResponse": {
+      "type": "object",
+      "properties": {
+        "orgs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/orgOrgShort"
+          }
+        }
+      }
+    },
+    "orgLocationItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        }
+      }
+    },
+    "orgMain": {
+      "type": "object",
+      "properties": {
+        "area": {
+          "$ref": "#/definitions/orgAreaFullItem"
+        },
+        "employeeCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "id": {
+          "type": "string"
+        },
+        "inn": {
+          "type": "number",
+          "format": "double"
+        },
+        "kind": {
+          "$ref": "#/definitions/orgOrgKind"
+        },
+        "kpp": {
+          "type": "number",
+          "format": "double"
+        },
+        "liquidationDate": {
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/definitions/orgLocationItem"
+        },
+        "manager": {
+          "$ref": "#/definitions/orgManagerItem"
+        },
+        "metros": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/orgMetroFullItemWithDistance"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "nameFullWithOpf": {
+          "type": "string"
+        },
+        "nameShortWithOpf": {
+          "type": "string"
+        },
+        "ogrn": {
+          "type": "number",
+          "format": "double"
+        },
+        "ogrnDate": {
+          "type": "string"
+        },
+        "okato": {
+          "type": "number",
+          "format": "double"
+        },
+        "okfs": {
+          "type": "number",
+          "format": "double"
+        },
+        "okogu": {
+          "type": "number",
+          "format": "double"
+        },
+        "okpo": {
+          "type": "number",
+          "format": "double"
+        },
+        "oktmo": {
+          "type": "number",
+          "format": "double"
+        },
+        "okved": {
+          "$ref": "#/definitions/orgOkvedFullItem"
+        },
+        "okvedDop": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/orgOkvedItem"
+          }
+        },
+        "opfCode": {
+          "type": "number",
+          "format": "double"
+        },
+        "opfFull": {
+          "type": "string"
+        },
+        "opfKind": {
+          "$ref": "#/definitions/orgOpfKind"
+        },
+        "opfShort": {
+          "type": "string"
+        },
+        "registrationDate": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "statusKind": {
+          "$ref": "#/definitions/orgStatusKind"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      }
+    },
+    "orgManagerItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        }
+      }
+    },
+    "orgMetroFullItem": {
+      "type": "object",
+      "properties": {
+        "area": {
+          "$ref": "#/definitions/orgAreaFullItem"
+        },
+        "id": {
+          "type": "string"
+        },
+        "line": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        }
+      }
+    },
+    "orgMetroFullItemWithDistance": {
+      "type": "object",
+      "properties": {
+        "area": {
+          "$ref": "#/definitions/orgAreaFullItem"
+        },
+        "distance": {
+          "type": "number",
+          "format": "float"
+        },
+        "id": {
+          "type": "string"
+        },
+        "line": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        }
+      }
+    },
+    "orgOkvedFullItem": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "codeWithName": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/orgOkvedKind"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        }
+      }
+    },
+    "orgOkvedItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/orgOkvedKind"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        }
+      }
+    },
+    "orgOkvedKind": {
+      "type": "string",
+      "title": "Версия справочника ОКВЭД",
+      "default": "OKVED_KIND_NONE",
+      "enum": [
+        "OKVED_KIND_NONE",
+        "Y2001",
+        "Y2004"
+      ]
+    },
+    "orgOpfKind": {
+      "type": "string",
+      "title": "Версия справочника ОКОПФ",
+      "default": "OPF_KIND_NONE",
+      "enum": [
+        "OPF_KIND_NONE",
+        "Y1999",
+        "Y2012",
+        "Y2014"
+      ]
+    },
+    "orgOrgKind": {
+      "type": "string",
+      "title": "- LEGAL: Юридическое лицо\n - INDIVIDUAL: Индивидуальный предприниматель",
+      "default": "ORG_KIND_NONE",
+      "enum": [
+        "ORG_KIND_NONE",
+        "LEGAL",
+        "INDIVIDUAL"
+      ]
+    },
+    "orgOrgShort": {
+      "type": "object",
+      "properties": {
+        "area": {
+          "$ref": "#/definitions/orgAreaItem"
+        },
+        "id": {
+          "type": "string"
+        },
+        "inn": {
+          "type": "number",
+          "format": "double"
+        },
+        "kind": {
+          "$ref": "#/definitions/orgOrgKind"
+        },
+        "kpp": {
+          "type": "number",
+          "format": "double"
+        },
+        "location": {
+          "$ref": "#/definitions/orgLocationItem"
+        },
+        "manager": {
+          "$ref": "#/definitions/orgManagerItem"
+        },
+        "name": {
+          "type": "string"
+        },
+        "ogrn": {
+          "type": "number",
+          "format": "double"
+        },
+        "okved": {
+          "$ref": "#/definitions/orgOkvedItem"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "statusKind": {
+          "$ref": "#/definitions/orgStatusKind"
+        }
+      }
+    },
+    "orgStatusKind": {
+      "description": "- ACTIVE: Действующая\n - LIQUIDATING: Ликвидируется\n - LIQUIDATED: Ликвидирована\n - BANKRUPT: Банкротство\n - REORGANIZING: В процессе присоединения к другому юрлицу, с последующей ликвидацией",
+      "type": "string",
+      "title": "Статус организации",
+      "default": "STATUS_KIND_NONE",
+      "enum": [
+        "STATUS_KIND_NONE",
+        "ACTIVE",
+        "LIQUIDATING",
+        "LIQUIDATED",
+        "BANKRUPT",
+        "REORGANIZING"
+      ]
     },
     "parserApp": {
       "type": "object",

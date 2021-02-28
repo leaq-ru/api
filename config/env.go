@@ -31,6 +31,7 @@ type service struct {
 	User       string `envconfig:"SERVICE_USER"`
 	Billing    string `envconfig:"SERVICE_BILLING"`
 	Exporter   string `envconfig:"SERVICE_EXPORTER"`
+	Org        string `envconfig:"SERVICE_ORG"`
 }
 
 var Env c
