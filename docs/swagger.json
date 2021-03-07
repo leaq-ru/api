@@ -2433,6 +2433,11 @@
             "type": "string",
             "name": "okvedId",
             "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "excludeOrgId",
+            "in": "query"
           }
         ],
         "responses": {
@@ -3488,6 +3493,12 @@
         },
         "main": {
           "$ref": "#/definitions/orgMain"
+        },
+        "related": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/orgOrgShort"
+          }
         }
       }
     },
