@@ -1,8 +1,9 @@
-PROTO_VER       := v1.22.8
+PROTO_VER       := v1.22.9
 SWAGGER_PATH    := $(GOPATH)/pkg/mod/github.com/nnqq/scr-proto@$(PROTO_VER)/codegen/swagger
 INFO_PATH       := $(SWAGGER_PATH)/swagger/info.swagger.json
 COMPANY_PATH    := $(SWAGGER_PATH)/parser/company.swagger.json
 POST_PATH       := $(SWAGGER_PATH)/parser/post.swagger.json
+REVIEW_PATH     := $(SWAGGER_PATH)/parser/review.swagger.json
 CITY_PATH       := $(SWAGGER_PATH)/city/city.swagger.json
 CATEGORY_PATH   := $(SWAGGER_PATH)/category/category.swagger.json
 TECHNOLOGY_PATH := $(SWAGGER_PATH)/technology/technology.swagger.json
@@ -20,6 +21,7 @@ all:
 		$(INFO_PATH) \
 		$(COMPANY_PATH) \
 		$(POST_PATH) \
+		$(REVIEW_PATH) \
 		$(CITY_PATH) \
 		$(CATEGORY_PATH) \
 		$(TECHNOLOGY_PATH) \

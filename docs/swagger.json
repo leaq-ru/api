@@ -2507,6 +2507,105 @@
         }
       }
     },
+    "/v1/review/create": {
+      "post": {
+        "tags": [
+          "Review"
+        ],
+        "operationId": "Review_Create",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/parserCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/review/delete": {
+      "delete": {
+        "tags": [
+          "Review"
+        ],
+        "operationId": "Review_Delete",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "reviewId",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/review/get": {
+      "get": {
+        "tags": [
+          "Review"
+        ],
+        "operationId": "Review_GetReviews",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "opts.skip",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "20 default",
+            "name": "opts.limit",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "companyId",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/parserGetReviewsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        }
+      }
+    },
     "/v1/role/addCompanyAdmin": {
       "post": {
         "tags": [
@@ -3868,6 +3967,21 @@
         }
       }
     },
+    "parserCreateRequest": {
+      "type": "object",
+      "properties": {
+        "companyId": {
+          "type": "string"
+        },
+        "positive": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
     "parserDnsItem": {
       "type": "object",
       "properties": {
@@ -4087,6 +4201,12 @@
             "$ref": "#/definitions/parserShortCompany"
           }
         },
+        "reviews": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parserReviewItem"
+          }
+        },
         "technologyCategories": {
           "type": "array",
           "items": {
@@ -4148,6 +4268,17 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/parserFullCompany"
+          }
+        }
+      }
+    },
+    "parserGetReviewsResponse": {
+      "type": "object",
+      "properties": {
+        "reviews": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parserReviewItem"
           }
         }
       }
@@ -4290,6 +4421,27 @@
         },
         "text": {
           "type": "string"
+        }
+      }
+    },
+    "parserReviewItem": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "positive": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "text": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/userShortUser"
         }
       }
     },
