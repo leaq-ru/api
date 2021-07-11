@@ -8,12 +8,9 @@ import (
 	"github.com/nnqq/scr-api/middleware"
 	"github.com/nnqq/scr-api/ratelimit"
 	"github.com/nnqq/scr-proto/codegen/go/billing"
-	"github.com/nnqq/scr-proto/codegen/go/category"
-	"github.com/nnqq/scr-proto/codegen/go/city"
 	"github.com/nnqq/scr-proto/codegen/go/exporter"
 	"github.com/nnqq/scr-proto/codegen/go/org"
 	"github.com/nnqq/scr-proto/codegen/go/parser"
-	"github.com/nnqq/scr-proto/codegen/go/technology"
 	"github.com/nnqq/scr-proto/codegen/go/user"
 	"google.golang.org/grpc"
 	"net/http"
@@ -38,10 +35,10 @@ func serveGW(mux *runtime.ServeMux) {
 	logger.Must(parser.RegisterCompanyHandlerFromEndpoint(ctx, mux, config.Env.Service.Parser, opts))
 	logger.Must(parser.RegisterPostHandlerFromEndpoint(ctx, mux, config.Env.Service.Parser, opts))
 	logger.Must(parser.RegisterReviewHandlerFromEndpoint(ctx, mux, config.Env.Service.Parser, opts))
-	logger.Must(city.RegisterCityHandlerFromEndpoint(ctx, mux, config.Env.Service.City, opts))
-	logger.Must(category.RegisterCategoryHandlerFromEndpoint(ctx, mux, config.Env.Service.Category, opts))
-	logger.Must(technology.RegisterTechnologyHandlerFromEndpoint(ctx, mux, config.Env.Service.Technology, opts))
-	logger.Must(technology.RegisterDnsHandlerFromEndpoint(ctx, mux, config.Env.Service.Technology, opts))
+	logger.Must(parser.RegisterCityHandlerFromEndpoint(ctx, mux, config.Env.Service.Parser, opts))
+	logger.Must(parser.RegisterCategoryHandlerFromEndpoint(ctx, mux, config.Env.Service.Parser, opts))
+	logger.Must(parser.RegisterTechnologyHandlerFromEndpoint(ctx, mux, config.Env.Service.Parser, opts))
+	logger.Must(parser.RegisterDnsHandlerFromEndpoint(ctx, mux, config.Env.Service.Parser, opts))
 	logger.Must(user.RegisterUserHandlerFromEndpoint(ctx, mux, config.Env.Service.User, opts))
 	logger.Must(user.RegisterRoleHandlerFromEndpoint(ctx, mux, config.Env.Service.User, opts))
 	logger.Must(billing.RegisterBillingHandlerFromEndpoint(ctx, mux, config.Env.Service.Billing, opts))

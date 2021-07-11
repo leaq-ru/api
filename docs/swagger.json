@@ -244,12 +244,12 @@
         "tags": [
           "Category"
         ],
-        "operationId": "Category_GetAll",
+        "operationId": "Category_GetAllCategory",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/categoryCategoriesResponse"
+              "$ref": "#/definitions/parserCategoriesResponse"
             }
           },
           "default": {
@@ -266,7 +266,7 @@
         "tags": [
           "Category"
         ],
-        "operationId": "Category_GetById",
+        "operationId": "Category_GetCategoryById",
         "parameters": [
           {
             "type": "string",
@@ -278,7 +278,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/categoryCategoryItem"
+              "$ref": "#/definitions/parserCategoryItem"
             }
           },
           "default": {
@@ -295,7 +295,7 @@
         "tags": [
           "Category"
         ],
-        "operationId": "Category_GetByIds",
+        "operationId": "Category_GetCategoryByIds",
         "parameters": [
           {
             "type": "array",
@@ -311,7 +311,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/categoryCategoriesResponse"
+              "$ref": "#/definitions/parserCategoriesResponse"
             }
           },
           "default": {
@@ -328,7 +328,7 @@
         "tags": [
           "Category"
         ],
-        "operationId": "Category_GetBySlug",
+        "operationId": "Category_GetCategoryBySlug",
         "parameters": [
           {
             "type": "string",
@@ -340,7 +340,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/categoryCategoryItem"
+              "$ref": "#/definitions/parserCategoryItem"
             }
           },
           "default": {
@@ -357,7 +357,7 @@
         "tags": [
           "Category"
         ],
-        "operationId": "Category_GetHints",
+        "operationId": "Category_GetCategoryHints",
         "parameters": [
           {
             "type": "string",
@@ -376,7 +376,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/categoryCategoriesResponse"
+              "$ref": "#/definitions/parserCategoriesResponse"
             }
           },
           "default": {
@@ -393,12 +393,12 @@
         "tags": [
           "City"
         ],
-        "operationId": "City_GetAll",
+        "operationId": "City_GetAllCity",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/cityCitiesResponse"
+              "$ref": "#/definitions/parserCitiesResponse"
             }
           },
           "default": {
@@ -415,7 +415,7 @@
         "tags": [
           "City"
         ],
-        "operationId": "City_GetById",
+        "operationId": "City_GetCityById",
         "parameters": [
           {
             "type": "string",
@@ -427,7 +427,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/cityCityItem"
+              "$ref": "#/definitions/parserCityItem"
             }
           },
           "default": {
@@ -444,7 +444,7 @@
         "tags": [
           "City"
         ],
-        "operationId": "City_GetByIds",
+        "operationId": "City_GetCityByIds",
         "parameters": [
           {
             "type": "array",
@@ -460,7 +460,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/cityCitiesResponse"
+              "$ref": "#/definitions/parserCitiesResponse"
             }
           },
           "default": {
@@ -477,7 +477,7 @@
         "tags": [
           "City"
         ],
-        "operationId": "City_GetBySlug",
+        "operationId": "City_GetCityBySlug",
         "parameters": [
           {
             "type": "string",
@@ -489,7 +489,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/cityCityItem"
+              "$ref": "#/definitions/parserCityItem"
             }
           },
           "default": {
@@ -506,7 +506,7 @@
         "tags": [
           "City"
         ],
-        "operationId": "City_GetHints",
+        "operationId": "City_GetCityHints",
         "parameters": [
           {
             "type": "string",
@@ -525,7 +525,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/cityCitiesResponse"
+              "$ref": "#/definitions/parserCitiesResponse"
             }
           },
           "default": {
@@ -1484,7 +1484,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/technologyGetDnsHintsResponse"
+              "$ref": "#/definitions/parserGetDnsHintsResponse"
             }
           },
           "default": {
@@ -2810,7 +2810,7 @@
         "tags": [
           "Technology"
         ],
-        "operationId": "Technology_GetBySlug",
+        "operationId": "Technology_GetTechBySlug",
         "parameters": [
           {
             "type": "string",
@@ -2822,7 +2822,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/technologyGetBySlugResponse"
+              "$ref": "#/definitions/parserGetTechBySlugResponse"
             }
           },
           "default": {
@@ -2839,7 +2839,7 @@
         "tags": [
           "Technology"
         ],
-        "operationId": "Technology_GetHints",
+        "operationId": "Technology_GetTechHints",
         "parameters": [
           {
             "type": "string",
@@ -2867,7 +2867,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/technologyGetHintsResponse"
+              "$ref": "#/definitions/parserGetTechHintsResponse"
             }
           },
           "default": {
@@ -3384,56 +3384,6 @@
         "PENDING",
         "SUCCESS"
       ]
-    },
-    "categoryCategoriesResponse": {
-      "type": "object",
-      "properties": {
-        "categories": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/categoryCategoryItem"
-          }
-        }
-      }
-    },
-    "categoryCategoryItem": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "slug": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        }
-      }
-    },
-    "cityCitiesResponse": {
-      "type": "object",
-      "properties": {
-        "cities": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/cityCityItem"
-          }
-        }
-      }
-    },
-    "cityCityItem": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "slug": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        }
-      }
     },
     "exporterExportCompaniesResponse": {
       "type": "object",
@@ -3967,6 +3917,56 @@
         }
       }
     },
+    "parserCategoriesResponse": {
+      "type": "object",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parserCategoryItem"
+          }
+        }
+      }
+    },
+    "parserCategoryItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "parserCitiesResponse": {
+      "type": "object",
+      "properties": {
+        "cities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parserCityItem"
+          }
+        }
+      }
+    },
+    "parserCityItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
     "parserCreateRequest": {
       "type": "object",
       "properties": {
@@ -4094,7 +4094,7 @@
           "type": "string"
         },
         "category": {
-          "$ref": "#/definitions/categoryCategoryItem"
+          "$ref": "#/definitions/parserCategoryItem"
         },
         "description": {
           "type": "string"
@@ -4164,7 +4164,7 @@
           "type": "string"
         },
         "city": {
-          "$ref": "#/definitions/cityCityItem"
+          "$ref": "#/definitions/parserCityItem"
         }
       }
     },
@@ -4210,13 +4210,24 @@
         "technologyCategories": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/parserTechnologyCategory"
+            "$ref": "#/definitions/parserTechCategoryInverted"
           }
         },
         "verified": {
           "type": "boolean",
           "format": "boolean",
           "title": "company has owner"
+        }
+      }
+    },
+    "parserGetDnsHintsResponse": {
+      "type": "object",
+      "properties": {
+        "dns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parserDnsItem"
+          }
         }
       }
     },
@@ -4283,12 +4294,45 @@
         }
       }
     },
+    "parserGetTechBySlugResponse": {
+      "type": "object",
+      "properties": {
+        "technology": {
+          "$ref": "#/definitions/parserTechItem"
+        }
+      }
+    },
+    "parserGetTechHintsResponse": {
+      "type": "object",
+      "properties": {
+        "technologies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parserHintTechItem"
+          }
+        }
+      }
+    },
     "parserGetTotalCountResponse": {
       "type": "object",
       "properties": {
         "totalCount": {
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "parserHintTechItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
         }
       }
     },
@@ -4311,10 +4355,10 @@
           "type": "string"
         },
         "category": {
-          "$ref": "#/definitions/categoryCategoryItem"
+          "$ref": "#/definitions/parserCategoryItem"
         },
         "city": {
-          "$ref": "#/definitions/cityCityItem"
+          "$ref": "#/definitions/parserCityItem"
         },
         "email": {
           "type": "string"
@@ -4484,10 +4528,10 @@
           "type": "string"
         },
         "category": {
-          "$ref": "#/definitions/categoryCategoryItem"
+          "$ref": "#/definitions/parserCategoryItem"
         },
         "city": {
-          "$ref": "#/definitions/cityCityItem"
+          "$ref": "#/definitions/parserCityItem"
         },
         "email": {
           "type": "string"
@@ -4581,7 +4625,7 @@
         }
       }
     },
-    "parserTechnologyCategory": {
+    "parserTechCategoryInverted": {
       "type": "object",
       "properties": {
         "id": {
@@ -4593,12 +4637,46 @@
         "technologies": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/parserTechnologyItem"
+            "$ref": "#/definitions/parserTechItemInverted"
           }
         }
       }
     },
-    "parserTechnologyItem": {
+    "parserTechCategoryItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "parserTechItem": {
+      "type": "object",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parserTechCategoryItem"
+          }
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "parserTechItemInverted": {
       "type": "object",
       "properties": {
         "id": {
@@ -4696,95 +4774,6 @@
           "type": "string"
         },
         "message": {
-          "type": "string"
-        }
-      }
-    },
-    "technologyCategoryItem": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        }
-      }
-    },
-    "technologyDnsItem": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        }
-      }
-    },
-    "technologyGetBySlugResponse": {
-      "type": "object",
-      "properties": {
-        "technology": {
-          "$ref": "#/definitions/technologyTechnologyItem"
-        }
-      }
-    },
-    "technologyGetDnsHintsResponse": {
-      "type": "object",
-      "properties": {
-        "dns": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/technologyDnsItem"
-          }
-        }
-      }
-    },
-    "technologyGetHintsResponse": {
-      "type": "object",
-      "properties": {
-        "technologies": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/technologyHintTechnologyItem"
-          }
-        }
-      }
-    },
-    "technologyHintTechnologyItem": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string"
-        }
-      }
-    },
-    "technologyTechnologyItem": {
-      "type": "object",
-      "properties": {
-        "categories": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/technologyCategoryItem"
-          }
-        },
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "slug": {
-          "type": "string"
-        },
-        "version": {
           "type": "string"
         }
       }

@@ -24,14 +24,11 @@ type http struct {
 }
 
 type service struct {
-	Parser     string `envconfig:"SERVICE_PARSER"`
-	City       string `envconfig:"SERVICE_CITY"`
-	Category   string `envconfig:"SERVICE_CATEGORY"`
-	Technology string `envconfig:"SERVICE_TECHNOLOGY"`
-	User       string `envconfig:"SERVICE_USER"`
-	Billing    string `envconfig:"SERVICE_BILLING"`
-	Exporter   string `envconfig:"SERVICE_EXPORTER"`
-	Org        string `envconfig:"SERVICE_ORG"`
+	Parser   string `envconfig:"SERVICE_PARSER"`
+	User     string `envconfig:"SERVICE_USER"`
+	Billing  string `envconfig:"SERVICE_BILLING"`
+	Exporter string `envconfig:"SERVICE_EXPORTER"`
+	Org      string `envconfig:"SERVICE_ORG"`
 }
 
 var Env c
