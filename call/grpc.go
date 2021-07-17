@@ -1,10 +1,10 @@
 package call
 
 import (
-	"github.com/nnqq/scr-api/config"
-	"github.com/nnqq/scr-api/logger"
-	"github.com/nnqq/scr-proto/codegen/go/billing"
-	"github.com/nnqq/scr-proto/codegen/go/user"
+	"github.com/leaq-ru/api/config"
+	"github.com/leaq-ru/api/logger"
+	"github.com/leaq-ru/proto/codegen/go/billing"
+	"github.com/leaq-ru/proto/codegen/go/user"
 	"google.golang.org/grpc"
 )
 

@@ -2,8 +2,8 @@ package redis
 
 import (
 	rd "github.com/go-redis/redis/v7"
-	"github.com/nnqq/scr-api/config"
-	"github.com/nnqq/scr-api/logger"
+	"github.com/leaq-ru/api/config"
+	"github.com/leaq-ru/api/logger"
 )
 
 var Client *rd.Client

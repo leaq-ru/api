@@ -2,9 +2,9 @@ package middleware
 
 import (
 	"context"
-	"github.com/nnqq/scr-api/call"
-	"github.com/nnqq/scr-api/logger"
-	"github.com/nnqq/scr-proto/codegen/go/user"
+	"github.com/leaq-ru/api/call"
+	"github.com/leaq-ru/api/logger"
+	"github.com/leaq-ru/proto/codegen/go/user"
 	"net/http"
 	"strings"
 	"time"

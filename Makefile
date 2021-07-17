@@ -1,5 +1,5 @@
 PROTO_VER       := v1.23.0
-SWAGGER_PATH    := $(GOPATH)/pkg/mod/github.com/nnqq/scr-proto@$(PROTO_VER)/codegen/swagger
+SWAGGER_PATH    := $(GOPATH)/pkg/mod/github.com/leaq-ru/proto@$(PROTO_VER)/codegen/swagger
 INFO_PATH       := $(SWAGGER_PATH)/swagger/info.swagger.json
 COMPANY_PATH    := $(SWAGGER_PATH)/parser/company.swagger.json
 POST_PATH       := $(SWAGGER_PATH)/parser/post.swagger.json
