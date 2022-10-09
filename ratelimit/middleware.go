@@ -87,7 +87,7 @@ func init() {
 				}
 			} else {
 				rateRPS = limiter.Rate{
-					Limit:  1,
+					Limit:  10,
 					Period: time.Second,
 				}
 			}
